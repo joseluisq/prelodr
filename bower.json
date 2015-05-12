@@ -1,0 +1,28 @@
+{
+  "name": "prelodr",
+  "version": "1.0.0",
+  "homepage": "https://github.com/quintana-dev/preloadr",
+  "authors": [
+    "Jose Luis Quintana <joseluisquintana20@gmail.com>"
+  ],
+  "description": "A simple Material preloader inspired in Google Inbox",
+  "main": "prelodr.js",
+  "moduleType": [
+    "global"
+  ],
+  "keywords": [
+    "preloader",
+    "minimal",
+    "responsive",
+    "material-design",
+    "jquery-plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

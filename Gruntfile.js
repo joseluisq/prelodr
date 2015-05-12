@@ -1,0 +1,109 @@
+module.exports = function (grunt) {
+  'use strict'
+
+  require('time-grunt')(grunt)
+  require('load-grunt-tasks')(grunt)
+
+  var pkg = grunt.file.readJSON('package.json')
+  var config = {
+    dist: 'dist',
+    examples: 'examples',
+    src: 'src',
+    test: 'test',
+    banner: '/*! <%= pkg.name %> v<%= pkg.version %> | ' +
+      '(c) <%= grunt.template.today("yyyy") %> <%= pkg.author %> | ' +
+      '<%= pkg.license %> */\n'
+  }
+
+  grunt.initConfig({
+    config: config,
+    pkg: pkg,
+    watch: {
+      js: {
+        files: ['<%= config.src %>/{,*/}*.js'],
+        tasks: ['jshint'],
+        options: {
+          livereload: true
+        }
+      },
+      livereload: {
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        },
+        files: [
+          '<%= config.examples %>/{,*/}*.html'
+        ]
+      }
+    },
+    connect: {
+      options: {
+        port: 7000,
+        open: true,
+        livereload: 35729,
+        hostname: '127.0.0.1'
+      },
+      livereload: {
+        options: {
+          middleware: function (connect) {
+            return [
+              connect.static(config.examples),
+              function (req, res, next) {
+                if (req.url === ('/' + config.src + '/' + pkg.name.toLowerCase() + '.js')) {
+                  res.setHeader('content-type', 'text/javascript')
+                  res.end(grunt.file.read('src/' + pkg.name.toLowerCase() + '.js', 'utf-8'))
+                }
+
+                if (req.url === ('/css/' + pkg.name.toLowerCase() + '.css')) {
+                  res.setHeader('content-type', 'text/css')
+                  res.end(grunt.file.read('css/' + pkg.name.toLowerCase() + '.css', 'utf-8'))
+                } else {
+                  return next()
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      },
+      all: [
+        'Gruntfile.js',
+        '<%= config.examples %>/js/{,*/}*.js',
+        '<%= config.test %>/spec/{,*/}*.js'
+      ]
+    },
+    uglify: {
+      options: {
+        banner: '<%= config.banner %>'
+      },
+      dist: {
+        files: {
+          '<%= config.dist %>/<%= pkg.name.toLowerCase() %>.min.js': ['<%= config.src %>/<%= pkg.name.toLowerCase() %>.js']
+        }
+      }
+    }
+  })
+
+  // Server Tasks
+  grunt.registerTask('serve', 'Start the server and preview your app. --remote-access to allow remote access', function () {
+    if (grunt.option('remote-access')) {
+      grunt.config.set('connect.options.hostname', '0.0.0.0')
+    }
+
+    grunt.task.run([
+      'connect:livereload',
+      'watch'
+    ])
+  })
+
+  // Build Tasks
+  grunt.registerTask('build', function () {
+    grunt.task.run([
+      'uglify:dist'
+    ])
+  })
+}

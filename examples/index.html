@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Prelodr Example</title>
+
+    <link rel="stylesheet" href="css/prelodr.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  </head>
+  <body>
+
+    <button id="btn-preloadr">Show Preloadr</button>
+
+    <script src="src/prelodr.js"></script>
+    <script>
+      (function() {
+
+        var preload = new Prelodr({
+          classPrefix: 'prelodr',
+          show: function(){
+            console.log('Show callback');
+          },
+          hide: function(){
+            console.log('Hide callback');
+          }
+        })
+
+        var $btnPreloadr = document.getElementById('btn-preloadr')
+        $btnPreloadr.addEventListener('click', function(){
+          // Show preloader
+          preload.in('Processing...');
+
+          // // Hide preloader at 2 seconds
+          setTimeout(function(){
+            preload.out()
+          }, 2000);
+
+        }, false)
+
+      })(this)
+    </script>
+
+  </body>
+</html>

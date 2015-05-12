@@ -20,7 +20,7 @@ describe('Prelodr', function () {
 
   it('class should be initialized successfully.', function () {
     var prelodr = new Prelodr()
-    expect(preloadr).to.be.an('object')
+    expect(prelodr).to.be.an('object')
   })
 
   it('show() callback should be called successfully.', function (done) {

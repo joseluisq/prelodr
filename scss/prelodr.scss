@@ -8,7 +8,8 @@ $prelodr: '.prelodr';
   width: 100%;
   left: 0;
   top: 0;
-  background-color: rgba(220, 220, 220, 0.6);
+  background-color: #f5f5f5;
+  background-color: rgba(240, 240, 240, 0.95);
   font-family: Arial, sans-serif;
   font-size: 16px;
   overflow: hidden;
@@ -40,7 +41,7 @@ $prelodr: '.prelodr';
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
-    box-shadow: 0 0 20px 0 rgba(40, 40, 40, 0.3);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 5px 0px rgba(0,0,0,0.23);
     transition: all 0.3s ease;
     transform: scale(0.8);
     border-radius: 3px;
@@ -72,7 +73,7 @@ $prelodr: '.prelodr';
     padding-top: 3px;
     width: 100%;
     background-color: #0f9d58;
-    animation: #{$prelodr}-background linear 2.5s infinite;
+    animation: prelodr-background linear 2.5s infinite;
   }
 
   #{$prelodr}-progressbar:before,
@@ -85,7 +86,7 @@ $prelodr: '.prelodr';
     background-color: #0f9d58;
     height: 3px;
     content: '';
-    animation: #{$prelodr}-front linear 2.5s infinite;
+    animation: prelodr-front linear 2.5s infinite;
   }
 
   #{$prelodr}-progressbar:before {
@@ -97,7 +98,7 @@ $prelodr: '.prelodr';
   }
 }
 
-@keyframes #{$prelodr}-background {
+@keyframes prelodr-background {
   0%,
   24.9% {
     background-color: #0f9d58;
@@ -119,7 +120,7 @@ $prelodr: '.prelodr';
   }
 }
 
-@keyframes #{$prelodr}-front {
+@keyframes prelodr-front {
   0% {
     width: 0;
     background-color: #da4733;

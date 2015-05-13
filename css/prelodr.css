@@ -1,3 +1,5 @@
+/* Prelodr CSS */
+
 .prelodr {
   position: fixed;
   display: table;
@@ -5,36 +7,18 @@
   width: 100%;
   left: 0;
   top: 0;
-  background-color: rgba(220, 220, 220, 0.6);
+  background-color: #f5f5f5;
+  background-color: rgba(240, 240, 240, 0.95);
   font-family: Arial, sans-serif;
   font-size: 16px;
   overflow: hidden;
   cursor: default;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
 }
 
-/* In effect */
-.prelodr.prelodr-in {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* In effect */
-.prelodr.prelodr-in > span > span {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-}
-
-/* Out effect */
-.prelodr.prelodr-out {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Out effect */
 .prelodr > span {
   position: relative;
   display: table-cell;
@@ -58,23 +42,46 @@
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
-  box-shadow: 0 0 20px 0 rgba(40, 40, 40, 0.3);
-  transition: all 0.3s ease;
-  transform: scale(0.8);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+  -webkit-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+          transform: scale(0.8);
   border-radius: 3px;
 }
 
-.prelodr-progressbar {
+.prelodr.prelodr-in {
+  opacity: 1;
+  visibility: visible;
+}
+
+.prelodr.prelodr-in > span > span {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+.prelodr.prelodr-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.prelodr .prelodr-progressbar {
   position: absolute;
   bottom: 0;
   left: 0;
   padding-top: 3px;
   width: 100%;
   background-color: #0f9d58;
-  -webkit-animation: preloader-background linear 2.5s infinite;
-          animation: preloader-background linear 2.5s infinite;
+  -webkit-animation: prelodr-background linear 2.5s infinite;
+          animation: prelodr-background linear 2.5s infinite;
 }
-.prelodr-progressbar::before, .prelodr-progressbar::after {
+
+.prelodr .prelodr-progressbar:before,
+.prelodr .prelodr-progressbar:after {
   display: block;
   position: absolute;
   top: 0;
@@ -82,47 +89,58 @@
   width: 0;
   background-color: #0f9d58;
   height: 3px;
-  -webkit-animation: preloader-front linear 2.5s infinite;
-          animation: preloader-front linear 2.5s infinite;
   content: '';
+  -webkit-animation: prelodr-front linear 2.5s infinite;
+          animation: prelodr-front linear 2.5s infinite;
 }
-.prelodr-progressbar::before {
+
+.prelodr .prelodr-progressbar:before {
   right: 50%;
 }
-.prelodr-progressbar::after {
+
+.prelodr .prelodr-progressbar:after {
   left: 50%;
 }
 
-@-webkit-keyframes preloader-background {
-  0%, 24.9% {
+@-webkit-keyframes prelodr-background {
+  0%,
+  24.9% {
     background-color: #0f9d58;
   }
-  25%, 49.9% {
+  25%,
+  49.9% {
     background-color: #da4733;
   }
-  50%, 74.9% {
+  50%,
+  74.9% {
     background-color: #1d6fee;
   }
-  75%, 100% {
+  75%,
+  100% {
     background-color: #fdba2c;
   }
 }
 
-@keyframes preloader-background {
-  0%, 24.9% {
+@keyframes prelodr-background {
+  0%,
+  24.9% {
     background-color: #0f9d58;
   }
-  25%, 49.9% {
+  25%,
+  49.9% {
     background-color: #da4733;
   }
-  50%, 74.9% {
+  50%,
+  74.9% {
     background-color: #1d6fee;
   }
-  75%, 100% {
+  75%,
+  100% {
     background-color: #fdba2c;
   }
 }
-@-webkit-keyframes preloader-front {
+
+@-webkit-keyframes prelodr-front {
   0% {
     width: 0;
     background-color: #da4733;
@@ -148,7 +166,7 @@
     background-color: #fdba2c;
   }
   75% {
-    width: 0%;
+    width: 0;
     background-color: #0f9d58;
   }
   100% {
@@ -156,7 +174,8 @@
     background-color: #0f9d58;
   }
 }
-@keyframes preloader-front {
+
+@keyframes prelodr-front {
   0% {
     width: 0;
     background-color: #da4733;
@@ -182,7 +201,7 @@
     background-color: #fdba2c;
   }
   75% {
-    width: 0%;
+    width: 0;
     background-color: #0f9d58;
   }
   100% {

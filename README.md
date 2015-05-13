@@ -5,7 +5,7 @@
 
 ![image](https://cloud.githubusercontent.com/assets/1700322/7620904/6886be26-f988-11e4-995a-97eee6bfc6ca.png)
 
-[View demo](http://codepen.io/joseluisq/pen/rVeyXY)
+[View demo](http://codepen.io/joseluisq/full/rVeyXY)
 
 ## Install
 

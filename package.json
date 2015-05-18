@@ -12,7 +12,7 @@
     "jquery-plugin"
   ],
   "license": "MIT",
-  "files": [
+  "main": [
     "src/prelodr.js"
   ],
   "repository": {

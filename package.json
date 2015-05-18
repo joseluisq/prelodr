@@ -12,11 +12,14 @@
     "jquery-plugin"
   ],
   "license": "MIT",
-  "main": "src/prelodr.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/quintana-dev/prelodr.git"
   },
+  "main": "src/prelodr.js",
+  "files": [
+    "src"
+  ],
   "dependencies": {
     "jquery": ">=1.10.0"
   },

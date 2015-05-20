@@ -10,12 +10,11 @@ describe('Prelodr', function () {
   this.timeout(15000)
 
   jsdom({
-    src: fs.readFileSync('src/prelodr.js', 'utf-8')
+    src: fs.readFileSync('lib/prelodr.js', 'utf-8')
   })
 
   before(function () {
     Prelodr = global.window.Prelodr
-    document.body.innerHTML = fs.readFileSync('test/test.html', 'utf-8')
   })
 
   it('class should be initialized successfully.', function () {
@@ -42,9 +41,19 @@ describe('Prelodr', function () {
 
     prelodr.in('Loading...')
 
-    setTimeout(function () {
-      prelodr.out()
-    }, 400)
+    prelodr.out()
+  })
+
+  it('isVisible() should return "true" by default.', function (done) {
+    var prelodr = new Prelodr({
+      show: function () {
+        done()
+      }
+    })
+
+    prelodr.in('Loading...')
+
+    expect(prelodr.isVisible()).to.be.true
   })
 
 })

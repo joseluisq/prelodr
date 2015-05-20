@@ -26,27 +26,38 @@ $ npm install prelodr
 ```js
 var prelodr = new Prelodr()
 
-// Show preloader
+// Show prelodr
 prelodr.in('Loading...')
+
+// Hide prelodr
+prelodr.out()
 ```
 
 ## Options
 
-  * `classPrefix` : Prefix class for prelodr. Default is `prelodr` class.
-  * `zIndex` : Prelodr stack order.
+  * `duration` : Timing for show and hide transition.
+  * `prefixClass` : Prefix class for prelodr. Default is `prelodr` class.
   * `show` : Callback when prelodr is shown.
   * `hide` : Callback when prelodr is hidden.
 
 ## Methods
 
 #### Prelodr.in(text)
-Show the preloader
+Show the prelodr.
 
-* `text` *String* - Title for prelodr.
-
+* `text` *{String}* : Text for prelodr.
 
 #### Prelodr.out()
-Hide the prelodr
+Hide the prelodr.
+
+#### Prelodr.setOptions(options)
+* `options` *{Object}* : The custom options.
+
+#### Prelodr.setContainer(element)
+* `element` *{HTML Element}* : The element container. Default is `document.body`.
+
+#### Prelodr.isVisible()
+* Checks if Prelodr is visible (boolean).
 
 ## License
 MIT License 

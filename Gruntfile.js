@@ -8,7 +8,7 @@ module.exports = function (grunt) {
   var config = {
     dist: 'dist',
     examples: 'examples',
-    src: 'src',
+    src: 'lib',
     test: 'test',
     banner: '/*! <%= pkg.name %> v<%= pkg.version %> | ' +
       '(c) <%= grunt.template.today("yyyy") %> <%= pkg.author %> | ' +
@@ -47,10 +47,16 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static(config.examples),
+              connect.static('bower_components'),
               function (req, res, next) {
                 if (req.url === ('/' + config.src + '/' + pkg.name.toLowerCase() + '.js')) {
                   res.setHeader('content-type', 'text/javascript')
-                  res.end(grunt.file.read('src/' + pkg.name.toLowerCase() + '.js', 'utf-8'))
+                  res.end(grunt.file.read(config.src + '/' + pkg.name.toLowerCase() + '.js', 'utf-8'))
+                }
+
+                if (req.url === ('/bower_components/jquery/dist/jquery.js')) {
+                  res.setHeader('content-type', 'text/javascript')
+                  res.end(grunt.file.read('bower_components/jquery/dist/jquery.js', 'utf-8'))
                 }
 
                 if (req.url === ('/css/' + pkg.name.toLowerCase() + '.css')) {
@@ -72,7 +78,7 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= config.examples %>/js/{,*/}*.js',
+        'src/{,*/}*.js',
         '<%= config.test %>/spec/{,*/}*.js'
       ]
     },

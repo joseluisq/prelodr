@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Prelodr Example</title>
+    <title>Prelodr - jQuery Example</title>
 
     <style>
       @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
@@ -65,7 +65,7 @@
   </head>
   <body>
 
-    <h1>Prelodr</h1>
+    <h1>jQuery Prelodr</h1>
     <p>A simple Material preloader inspired in<br> Google Inbox.</p>
 
     <p>
@@ -78,11 +78,12 @@
       </a>
     </p>
 
-    <script src="lib/prelodr.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../lib/prelodr.js"></script>
     <script>
-      (function() {
+      $(function() {
 
-        var preloader = new Prelodr({
+        $('body').prelodr({
           prefixClass: 'prelodr',
           show: function(){
             console.log('Show callback')
@@ -92,19 +93,18 @@
           }
         })
 
-        var $btnPreloadr = document.getElementById('btn-preloadr')
-        $btnPreloadr.addEventListener('click', function(){
+        $('#btn-preloadr').on('click', function(){
           // Show prelodr
-          preloader.in('Processing...')
+          $('body').prelodr('in', 'Processing...')
 
           // Hide prelodr at 2.5 seconds
           setTimeout(function(){
-            preloader.out()
+            $('body').prelodr('out')
           }, 2500)
 
-        }, false)
+        })
 
-      })(this)
+      })
     </script>
 
   </body>

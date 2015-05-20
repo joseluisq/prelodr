@@ -10,7 +10,7 @@
 ## Install
 
 **Bower**
-a
+
 ```sh
 $ bower install --save prelodr
 ```

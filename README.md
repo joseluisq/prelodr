@@ -10,7 +10,7 @@
 ## Install
 
 **Bower**
-
+a
 ```sh
 $ bower install --save prelodr
 ```
@@ -31,6 +31,26 @@ prelodr.in('Loading...')
 
 // Hide prelodr
 prelodr.out()
+```
+
+#### jQuery
+
+```js
+$('body').prelodr({
+  prefixClass: 'prelodr',
+  show: function(){
+    console.log('Show callback')
+  },
+  hide: function(){
+    console.log('Hide callback')
+  }
+})
+
+// Show prelodr
+$('body').prelodr('in', 'Processing...')
+
+// Hide prelodr
+$('body').prelodr('out')
 ```
 
 ## Options

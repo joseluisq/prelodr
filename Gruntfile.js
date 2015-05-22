@@ -1,8 +1,8 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   'use strict'
 
   require('time-grunt')(grunt)
-  require('load-grunt-tasks')(grunt)
+  require('jit-grunt')(grunt)
 
   var pkg = grunt.file.readJSON('package.json')
   var config = {
@@ -10,9 +10,9 @@ module.exports = function (grunt) {
     examples: 'examples',
     src: 'lib',
     test: 'test',
-    banner: '/*! <%= pkg.name %> v<%= pkg.version %> | ' +
-      '(c) <%= grunt.template.today("yyyy") %> <%= pkg.author %> | ' +
-      '<%= pkg.license %> */\n'
+    banner: '/*! <%= pkg.name.charAt(0).toUpperCase() + pkg.name.slice(1) %> ' +
+      'v<%= pkg.version %> | (c) <%= grunt.template.today("yyyy") %>' +
+      '<%= pkg.author %> | <%= pkg.license %> */\n'
   }
 
   grunt.initConfig({
@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= config.src %>/{,*/}*.js'],
-        tasks: ['jshint'],
+        tasks: ['jscs'],
         options: {
           livereload: true
         }
@@ -44,11 +44,11 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static(config.examples),
               connect.static('bower_components'),
-              function (req, res, next) {
+              function(req, res, next) {
                 if (req.url === ('/' + config.src + '/' + pkg.name.toLowerCase() + '.js')) {
                   res.setHeader('content-type', 'text/javascript')
                   res.end(grunt.file.read(config.src + '/' + pkg.name.toLowerCase() + '.js', 'utf-8'))
@@ -71,10 +71,13 @@ module.exports = function (grunt) {
         }
       }
     },
-    jshint: {
+    jscs: {
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        config: '.jscsrc',
+        fix: true,
+        verbose: true,
+        requireCurlyBraces: ['if'],
+        reporter: require('jscs-stylish').path
       },
       all: [
         'Gruntfile.js',
@@ -95,7 +98,7 @@ module.exports = function (grunt) {
   })
 
   // Server Tasks
-  grunt.registerTask('serve', 'Start the server and preview your app. --remote-access to allow remote access', function () {
+  grunt.registerTask('serve', 'Start the server and preview your app. --remote-access to allow remote access', function() {
     if (grunt.option('remote-access')) {
       grunt.config.set('connect.options.hostname', '0.0.0.0')
     }
@@ -107,7 +110,7 @@ module.exports = function (grunt) {
   })
 
   // Build Tasks
-  grunt.registerTask('build', function () {
+  grunt.registerTask('build', function() {
     grunt.task.run([
       'uglify:dist'
     ])

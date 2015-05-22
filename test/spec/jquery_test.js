@@ -4,7 +4,7 @@ var fs = require('fs')
 var jsdom = require('mocha-jsdom')
 var expect = require('chai').expect
 
-describe('Prelodr (jQuery)', function () {
+describe('Prelodr (jQuery)', function() {
   var $
 
   this.timeout(15000)
@@ -16,19 +16,19 @@ describe('Prelodr (jQuery)', function () {
     ]
   })
 
-  before(function () {
+  before(function() {
     $ = global.window.jQuery
     document.body.innerHTML = fs.readFileSync('test/test.html', 'utf-8')
   })
 
-  it('class should be a jQuery instance.', function () {
+  it('class should be a jQuery instance.', function() {
     var $element = $('body').prelodr()
     expect($element).to.be.instanceof($)
   })
 
-  it('show() callback should be called successfully.', function (done) {
+  it('show() callback should be called successfully.', function(done) {
     var $element = $('body').prelodr({
-      show: function(){
+      show: function() {
         done()
       }
     })
@@ -37,9 +37,9 @@ describe('Prelodr (jQuery)', function () {
     expect($element).to.be.instanceof($)
   })
 
-  it('hide() callback should be called successfully.', function (done) {
+  it('hide() callback should be called successfully.', function(done) {
     var $element = $('body').prelodr({
-      hide: function(){
+      hide: function() {
         done()
       }
     })
@@ -49,9 +49,9 @@ describe('Prelodr (jQuery)', function () {
     expect($element).to.be.instanceof($)
   })
 
-  it('isVisible() should return "true" by default.', function (done) {
+  it('isVisible() should return "true" by default.', function(done) {
     var $element = $('body').prelodr({
-      hide: function(){
+      hide: function() {
         done()
       }
     })
@@ -61,4 +61,4 @@ describe('Prelodr (jQuery)', function () {
     $element.prelodr('out')
   })
 
-})
+});

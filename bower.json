@@ -1,15 +1,18 @@
 {
   "name": "prelodr",
-  "version": "1.0.1",
-  "homepage": "https://github.com/quintana-dev/preloadr",
+  "version": "1.0.2",
+  "description": "A simple Material preloader inspired in Google Inbox",
+  "homepage": "https://github.com/quintana-dev/prelodr",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/quintana-dev/prelodr.git"
+  },
+  "license": "MIT",
   "authors": [
     "José Luis Quintana <joseluisquintana20@gmail.com>"
   ],
-  "description": "A simple Material preloader inspired in Google Inbox",
   "main": "./lib/prelodr.js",
-  "moduleType": [
-    "global"
-  ],
+  "moduleType": "globals",
   "keywords": [
     "preloader",
     "minimal",
@@ -20,12 +23,11 @@
   "dependencies": {
     "jquery": ">= 1.7.0"
   },
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "Gruntfile.js",
+    "package.json"
   ]
 }

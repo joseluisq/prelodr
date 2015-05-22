@@ -1,0 +1,35 @@
+{
+  "plugins": ["jscs-jsdoc"],
+  "preset": "google",
+  "fileExtensions": [".js", "jscs"],
+
+  "requireParenthesesAroundIIFE": true,
+  "maximumLineLength": 120,
+  "validateLineBreaks": "LF",
+  "validateIndentation": 2,
+  "verbose": true,
+
+  "disallowKeywords": ["with"],
+  "disallowSpacesInsideObjectBrackets": null,
+  "disallowImplicitTypeConversion": ["string"],
+
+  "safeContextKeyword": "_this",
+
+  "excludeFiles": [
+    "node_modules/**",
+    "bower_components/**"
+  ],
+
+  "jsDoc": {
+    "checkAnnotations": "closurecompiler",
+    "checkParamNames": true,
+    "requireParamTypes": true,
+    "checkRedundantParams": true,
+    "checkReturnTypes": true,
+    "checkRedundantReturns": true,
+    "requireReturnTypes": true,
+    "checkTypes": "capitalizedNativeCase",
+    "checkRedundantAccess": true,
+    "requireNewlineAfterDescription": true
+  }
+}

@@ -1,8 +1,8 @@
 {
   "title": "Prelodr",
   "name": "prelodr",
-  "author": "José Luis Quintana (https://github.com/quintana-dev)",
-  "version": "1.0.1",
+  "author": "José Luis Quintana <joseluisquintana20@gmail.com>",
+  "version": "1.0.2",
   "description": "A simple Material preloader inspired in Google Inbox",
   "keywords": [
     "preloader",
@@ -18,19 +18,20 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "chai": "^1.10.0",
+    "chai": "^2.3.0",
     "grunt": "^0.4.5",
-    "grunt-contrib-connect": "^0.9.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-jscs": "^1.8.0",
+    "jit-grunt": "^0.9.1",
     "jquery": "^2.1.4",
+    "jscs-jsdoc": "^1.0.1",
+    "jscs-stylish": "^0.3.1",
     "jsdom": "^1.3.1",
-    "jshint-stylish": "^1.0.0",
-    "load-grunt-tasks": "^1.0.0",
-    "mocha": "^2.0.1",
+    "mocha": "^2.2.5",
     "mocha-jsdom": "^0.2.0",
-    "time-grunt": "^1.2.0"
+    "time-grunt": "^1.2.1"
   },
   "main": "./lib/prelodr.js",
   "engines": {
@@ -40,7 +41,6 @@
     "test": "mocha test"
   },
   "bugs": {
-    "url": "https://github.com/quintana-dev/prelodr/issues",
-    "email": "joseluisquintana20@gmail.com"
+    "url": "https://github.com/quintana-dev/prelodr/issues"
   }
 }

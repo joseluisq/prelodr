@@ -4,7 +4,7 @@ var fs = require('fs')
 var jsdom = require('mocha-jsdom')
 var expect = require('chai').expect
 
-describe('Prelodr', function () {
+describe('Prelodr', function() {
   var Prelodr
 
   this.timeout(15000)
@@ -13,18 +13,18 @@ describe('Prelodr', function () {
     src: fs.readFileSync('lib/prelodr.js', 'utf-8')
   })
 
-  before(function () {
+  before(function() {
     Prelodr = global.window.Prelodr
   })
 
-  it('class should be initialized successfully.', function () {
+  it('class should be initialized successfully.', function() {
     var prelodr = new Prelodr()
     expect(prelodr).to.be.an('object')
   })
 
-  it('show() callback should be called successfully.', function (done) {
+  it('show() callback should be called successfully.', function(done) {
     var prelodr = new Prelodr({
-      show: function () {
+      show: function() {
         done()
       }
     })
@@ -32,9 +32,9 @@ describe('Prelodr', function () {
     prelodr.in('Loading...')
   })
 
-  it('hide() callback should be called successfully.', function (done) {
+  it('hide() callback should be called successfully.', function(done) {
     var prelodr = new Prelodr({
-      hide: function () {
+      hide: function() {
         done()
       }
     })
@@ -44,9 +44,9 @@ describe('Prelodr', function () {
     prelodr.out()
   })
 
-  it('isVisible() should return "true" by default.', function (done) {
+  it('isVisible() should return "true" by default.', function(done) {
     var prelodr = new Prelodr({
-      show: function () {
+      show: function() {
         done()
       }
     })
@@ -56,4 +56,4 @@ describe('Prelodr', function () {
     expect(prelodr.isVisible()).to.be.true
   })
 
-})
+});

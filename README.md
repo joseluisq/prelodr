@@ -3,7 +3,7 @@
 
 > A simple Material preloader inspired in Google Inbox.
 
-![image](https://cloud.githubusercontent.com/assets/1700322/8085690/054e25a8-0f57-11e5-9338-a5927120cdc8.png)
+![image](http://g.recordit.co/0Uc5Bih5Tk.gif)
 
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)
 

@@ -47,31 +47,10 @@ module.exports = function(grunt) {
         options: {
           middleware: function(connect) {
             return [
+              connect.static("css"),
+              connect.static("lib"),
               connect.static(config.examples),
-              connect.static("bower_components"),
-              function(req, res, next) {
-                if (req.url === ("/" + config.src + "/" + pkg.name.toLowerCase() + ".js")) {
-                  res.setHeader("content-type", "text/javascript");
-                  res.end(grunt.file.read(config.src + "/" + pkg.name.toLowerCase() + ".js", "utf-8"));
-                }
-
-                if (req.url === ("bower_components/promise-polyfill/Promise.js")) {
-                  res.setHeader("content-type", "text/javascript");
-                  res.end(grunt.file.read("bower_components/promise-polyfill/Promise.js", "utf-8"));
-                }
-
-                if (req.url === ("/bower_components/jquery/dist/jquery.js")) {
-                  res.setHeader("content-type", "text/javascript");
-                  res.end(grunt.file.read("bower_components/jquery/dist/jquery.js", "utf-8"));
-                }
-
-                if (req.url === ("/css/" + pkg.name.toLowerCase() + ".css")) {
-                  res.setHeader("content-type", "text/css");
-                  res.end(grunt.file.read("css/" + pkg.name.toLowerCase() + ".css", "utf-8"));
-                } else {
-                  return next();
-                }
-              }
+              connect.static("bower_components")
             ];
           }
         }
@@ -84,8 +63,7 @@ module.exports = function(grunt) {
       all: {
         src: [
           "Gruntfile.js",
-          "src/{,*/}*.js",
-          "<%= config.test %>/spec/{,*/}*.js"
+          "src/{,*/}*.js"
         ]
       }
     },

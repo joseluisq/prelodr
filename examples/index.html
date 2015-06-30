@@ -5,7 +5,7 @@
     <title>Prelodr Example</title>
 
     <style>
-      @import url(http://fonts.googleapis.com/css?family=Roboto:100);
+      @import url("http://fonts.googleapis.com/css?family=Roboto:100");
 
       html {
         position: absolute;
@@ -62,7 +62,7 @@
       }
     </style>
 
-    <link rel="stylesheet" href="css/prelodr.css">
+    <link rel="stylesheet" href="prelodr.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   </head>
@@ -81,8 +81,7 @@
       </a>
     </p>
 
-    <script src="../bower_components/promise-polyfill/Promise.js"></script>
-    <script src="../lib/prelodr.js"></script>
+    <script src="prelodr.js"></script>
 
     <script>
       (function() {
@@ -101,12 +100,10 @@
 
         $btnPreloadr.addEventListener("click", function() {
           // Show prelodr
-          preloader.in("Processing...");
+          preloader.in("Initializing...").out()
+                   .in("Processing...").out();
 
-          // Hide prelodr at 2.5 seconds
-          setTimeout(function() {
-            preloader.out();
-          }, 2500);
+         preloader.in("Closing...").out();
 
         }, false);
 

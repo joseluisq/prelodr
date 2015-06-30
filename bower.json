@@ -21,8 +21,7 @@
     "jquery-plugin"
   ],
   "dependencies": {
-    "jquery": ">= 1.7.0",
-    "promise-polyfill": "~2.0.2"
+    "jquery": ">= 1.7.0"
   },
   "ignore": [
     "**/.*",

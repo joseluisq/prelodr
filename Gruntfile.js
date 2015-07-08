@@ -11,9 +11,8 @@ module.exports = function(grunt) {
     src: "lib",
     test: "test",
     banner: "/*! <%= pkg.name.charAt(0).toUpperCase() + pkg.name.slice(1) %> " +
-      "v<%= pkg.version %> | (c) <%= grunt.template.today(\"" +
-      "yyyy\") %>" +
-      "<%= pkg.author %> | <%= pkg.license %> */\n"
+      "v<%= pkg.version %> | <%= pkg.license %> | (c) <%= grunt.template.today(\"" +
+      "yyyy\") %> <%= pkg.author %> */\n"
   };
 
   grunt.initConfig({

@@ -27,6 +27,8 @@
         height: 100%;
         vertical-align: middle;
         font-weight: 100;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       h1 {
@@ -86,7 +88,7 @@
     <script>
       (function() {
 
-        var preloader = new Prelodr({
+        var prelodr = new Prelodr({
           prefixClass: "prelodr",
           show: function() {
             console.log("Show callback");
@@ -99,11 +101,29 @@
         var $btnPreloadr = document.getElementById("btn-preloadr");
 
         $btnPreloadr.addEventListener("click", function() {
-          // Show prelodr
-          preloader.in("Initializing...").out()
-                   .in("Processing...").out();
 
-         preloader.in("Closing...").out();
+          // Show prelodr (Chaining support)
+          prelodr.in("Initializing...")
+                 .out(function(done){
+
+                   console.info("  1 second delay... ");
+                   setTimeout(function(){
+                     done();
+                   }, 1000);
+
+                 })
+
+                 .in("Processing...")
+                 .out(function(done){
+
+                   console.info("  2 seconds delay... ");
+                   setTimeout(function(){
+                     done();
+                   }, 3000);
+
+                 })
+
+                 .in("Closing...").out();
 
         }, false);
 

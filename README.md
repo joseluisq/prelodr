@@ -8,7 +8,6 @@
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)
 
 ## Install
-
 **Bower**
 
 ```sh
@@ -24,16 +23,45 @@ $ npm install prelodr
 ## Usage
 
 ```js
-var prelodr = new Prelodr()
+var prelodr = new Prelodr();
 
-// Show prelodr
-prelodr.in('Loading...')
+// a) Show prelodr
+prelodr.in('Loading...');
 
-// Hide prelodr
-prelodr.out()
+// b) Hide prelodr
+prelodr.out();
 ```
 
-#### jQuery
+### Chaining support
+Note: `out(fn)` method supports a optional (fn) callback function.
+
+```js
+var prelodr = new Prelodr();
+
+prelodr.in("Initializing...")
+       .out(function(done){
+
+          console.info(" 1 second delay... ");
+          setTimeout(function(){
+            done();
+          }, 1000);
+
+       })
+
+       .in("Processing...")
+       .out(function(done){
+
+          console.info(" 2 seconds delay... ");
+          setTimeout(function(){
+            done();
+          }, 3000);
+
+       })
+
+       .in("Closing...").out();
+```
+
+### jQuery
 
 ```js
 $('body').prelodr({
@@ -46,38 +74,38 @@ $('body').prelodr({
   }
 })
 
-// Show prelodr
+// a) Show prelodr
 $('body').prelodr('in', 'Processing...')
 
-// Hide prelodr
+// b) Hide prelodr
 $('body').prelodr('out')
 ```
 
 ## Options
-
-  * `duration` : Timing for show and hide transition.
-  * `prefixClass` : Prefix class for prelodr. Default is `prelodr` class.
-  * `show` : Callback when prelodr is shown.
-  * `hide` : Callback when prelodr is hidden.
+- `duration` : Timing for show and hide transition.
+- `prefixClass` : Prefix class for prelodr. Default is `prelodr` class.
+- `show` : Callback when prelodr is shown.
+- `hide` : Callback when prelodr is hidden.
 
 ## Methods
-
-#### Prelodr.in(text)
+### Prelodr.in(text)
 Show the prelodr.
+- `text` _{String}_ : Text for prelodr.
 
-* `text` *{String}* : Text for prelodr.
-
-#### Prelodr.out()
+### Prelodr.out(fn)
 Hide the prelodr.
+- `fn` _{Function}_ : (Optional) Callback function
 
-#### Prelodr.setOptions(options)
-* `options` *{Object}* : The custom options.
+### Prelodr.setOptions(options)
+- `options` _{Object}_ : The custom options.
 
-#### Prelodr.setContainer(element)
-* `element` *{HTML Element}* : The element container. Default is `document.body`.
+### Prelodr.setContainer(element)
+- `element` _{HTML Element}_ : The element container. Default is `document.body`.
 
-#### Prelodr.isVisible()
-* Checks if Prelodr is visible (boolean).
+### Prelodr.isVisible()
+- Checks if Prelodr is visible (boolean).
 
 ## License
-MIT License 
+MIT license
+
+© 2015 [José Luis Quintana](http://quintana.io)

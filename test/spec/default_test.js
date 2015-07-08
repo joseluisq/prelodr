@@ -44,7 +44,7 @@ describe("Prelodr", function() {
     prelodr.out();
   });
 
-  it("isVisible() should return \"true\" by default.", function(done) {
+  it("isVisible() should return \"false\" by default.", function(done) {
     var prelodr = new Prelodr({
       show: function() {
         done();
@@ -53,7 +53,7 @@ describe("Prelodr", function() {
 
     prelodr.in("Loading...");
 
-    expect(prelodr.isVisible()).to.be.true;
+    expect(prelodr.isVisible()).to.be.false;
   });
 
 });

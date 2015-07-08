@@ -49,7 +49,7 @@ describe("Prelodr (jQuery)", function() {
     expect($element).to.be.instanceof($);
   });
 
-  it("isVisible() should return \"true\" by default.", function(done) {
+  it("isVisible() should return \"false\" by default.", function(done) {
     var $element = $("body").prelodr({
       hide: function() {
         done();
@@ -57,7 +57,7 @@ describe("Prelodr (jQuery)", function() {
     });
 
     $element.prelodr("in", "Processing...");
-    expect($element.prelodr("isVisible")).to.be.true;
+    expect($element.prelodr("isVisible")).to.be.false;
     $element.prelodr("out");
   });
 

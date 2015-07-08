@@ -59,7 +59,7 @@
       }
     </style>
 
-    <link rel="stylesheet" href="css/prelodr.css">
+    <link rel="stylesheet" href="prelodr.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   </head>
@@ -78,8 +78,8 @@
       </a>
     </p>
 
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../lib/prelodr.js"></script>
+    <script src="jquery/dist/jquery.js"></script>
+    <script src="prelodr.js"></script>
     <script>
       $(function() {
 
@@ -94,13 +94,13 @@
         })
 
         $('#btn-preloadr').on('click', function(){
-          // Show prelodr
-          $('body').prelodr('in', 'Processing...')
-
-          // Hide prelodr at 2.5 seconds
-          setTimeout(function(){
-            $('body').prelodr('out')
-          }, 2500)
+          // Show prelodr (Chaining support)
+          $('body').prelodr('in', 'Initializing...');
+          $('body').prelodr('out');
+          $('body').prelodr('in', 'Processing...');
+          $('body').prelodr('out');
+          $('body').prelodr('in', 'Closing...');
+          $('body').prelodr('out');
 
         })
 

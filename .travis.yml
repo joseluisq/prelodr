@@ -6,7 +6,6 @@ before_install: npm install grunt-cli -g
 before_script:
   - npm install bower -g
   - bower install
-  - grunt
 after_script:
   - npm run codecov
   - npm run coveralls

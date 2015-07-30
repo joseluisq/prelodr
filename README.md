@@ -1,5 +1,5 @@
 # Prelodr
-[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr) [![Inline docs](http://inch-ci.org/github/quintana-dev/prelodr.svg?branch=master&style=flat-square&v1)](http://inch-ci.org/github/quintana-dev/prelodr)
+[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr)  [![Coverage Status](https://img.shields.io/coveralls/quintana-dev/prelodr.svg?style=flat-square)](https://coveralls.io/github/quintana-dev/prelodr?branch=master) [![Inline docs](http://inch-ci.org/github/quintana-dev/prelodr.svg?branch=master&style=flat-square&v2)](http://inch-ci.org/github/quintana-dev/prelodr)
 
 > A simple Material preloader inspired in Google Inbox.
 
@@ -104,6 +104,9 @@ Hide the prelodr.
 
 ### Prelodr.isVisible()
 - Checks if Prelodr is visible (boolean).
+
+## Changelog
+Check out the [changelog](https://github.com/quintana-dev/prelodr/releases)
 
 ## License
 MIT license

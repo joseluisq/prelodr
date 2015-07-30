@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Prelodr - jQuery Example</title>
+    <title>Prelodr jQuery Example</title>
 
     <style>
-      @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+      @import url("http://fonts.googleapis.com/css?family=Roboto:100");
 
       html {
         position: absolute;
@@ -18,33 +18,38 @@
       body {
         text-align: center;
         margin: 2em;
-        font-family: 'Open Sans', sans-serif;
-        background-color: #5E84B0;
+        font-family: "Roboto", sans-serif;
+        background-color: #353a43;
         color: #fff;
-        letter-spacing: -0.02em;
         display: table-cell;
         width: 100%;
         overflow: hidden;
         height: 100%;
         vertical-align: middle;
+        font-weight: 100;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
 
       h1 {
-        font-weight: 200;
         font-size: 2.8em;
         margin-bottom: 0;
+        font-weight: 100;
       }
 
       button {
-        color: #5E84B0;
+        color: #353a43;
         background-color: #fff;
         padding: 0.5em 1em;
-        border: solid 1px #486b93;
+        border: 0;
         border-radius: 3px;
         font-size: 0.95em;
         box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16), 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
       }
-      button:hover, button:active {
+
+      button:hover,
+      button:active {
         color: #486b93;
       }
 
@@ -56,6 +61,7 @@
 
       p {
         margin-bottom: 2em;
+        color: #9498A0;
       }
     </style>
 
@@ -65,11 +71,11 @@
   </head>
   <body>
 
-    <h1>jQuery Prelodr</h1>
+    <h1>Prelodr jQuery</h1>
     <p>A simple Material preloader inspired in<br> Google Inbox.</p>
 
     <p>
-      <button id="btn-preloadr">Show Prelodr</button>
+      <button id="btn-preloadr">Start</button>
     </p>
 
     <p>
@@ -95,13 +101,16 @@
 
         $('#btn-preloadr').on('click', function(){
           // Show prelodr (Chaining support)
-          $('body').prelodr('in', 'Initializing...');
+          $('body').prelodr('in', 'Starting...');
           $('body').prelodr('out');
           $('body').prelodr('in', 'Processing...');
-          $('body').prelodr('out');
+          $('body').prelodr('out', function (done) {
+            setTimeout(function () {
+              done();
+            }, 1200);
+          });
           $('body').prelodr('in', 'Closing...');
           $('body').prelodr('out');
-
         })
 
       })

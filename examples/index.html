@@ -29,6 +29,7 @@
         font-weight: 100;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
 
       h1 {
@@ -40,7 +41,7 @@
       button {
         color: #353a43;
         background-color: #fff;
-        padding: 0.5em 1em;
+        padding: 0.5em 2em;
         border: 0;
         border-radius: 3px;
         font-size: 0.95em;
@@ -74,7 +75,7 @@
     <p>A simple Material preloader inspired in<br> Google Inbox.</p>
 
     <p>
-      <button id="btn-preloadr">Show Prelodr</button>
+      <button id="btn-preloadr">Start</button>
     </p>
 
     <p>
@@ -103,27 +104,13 @@
         $btnPreloadr.addEventListener("click", function() {
 
           // Show prelodr (Chaining support)
-          prelodr.in("Initializing...")
-                 .out(function(done){
-
-                   console.info("  1 second delay... ");
-                   setTimeout(function(){
-                     done();
-                   }, 1000);
-
-                 })
-
-                 .in("Processing...")
-                 .out(function(done){
-
-                   console.info("  2 seconds delay... ");
-                   setTimeout(function(){
-                     done();
-                   }, 3000);
-
-                 })
-
-                 .in("Closing...").out();
+          prelodr.in("Starting...").out()
+                  .in("Processing...").out(function (done) {
+                    setTimeout(function () {
+                      done();
+                    }, 1200);
+                  })
+                  .in("Finishing...").out();
 
         }, false);
 

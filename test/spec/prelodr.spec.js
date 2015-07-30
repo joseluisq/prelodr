@@ -4,6 +4,13 @@
 describe('Prelodr', function () {
   'use strict';
 
+  var prelodrGlobal;
+
+  beforeEach(function () {
+    // Initialize the Prelodr
+    prelodrGlobal = new Prelodr();
+  });
+
   // Basic usage
   describe('initializing', function () {
 
@@ -38,15 +45,61 @@ describe('Prelodr', function () {
       prelodr.out();
     });
 
+    // in()
+    it('should have a method in()', function () {
+      expect(prelodrGlobal.in).toBeDefined();
+    });
+
+    // out()
+    it('should have a method out()', function () {
+      expect(prelodrGlobal.out).toBeDefined();
+    });
+
+    // setOptions()
+    it('should have a method setOptions()', function () {
+      expect(prelodrGlobal.setOptions).toBeDefined();
+    });
+
+    // setContainer()
+    it('should have a method setContainer()', function () {
+      expect(prelodrGlobal.setContainer).toBeDefined();
+    });
+
+    // prepOut()
+    it('should have a method prepOut()', function () {
+      expect(prelodrGlobal.prepOut).toBeDefined();
+    });
+
+    // isVisible()
+    it('should have a method isVisible()', function () {
+      expect(prelodrGlobal.isVisible).toBeDefined();
+    });
+
+    // isVisible() -> false
+    it('isVisible() should be `false`', function () {
+      var prelodr = new Prelodr();
+      expect(prelodr.isVisible()).toBe(false);
+    });
+
+    // isVisible() -> true
+    it('isVisible() should be `true`', function () {
+      var prelodr = new Prelodr();
+      prelodr.in('Starting...');
+
+      setTimeout(function () {
+        expect(prelodr.isVisible()).toBe(true);
+      }, 1200);
+    });
+
   });
 
   // Chaining support
   describe('chaining support', function () {
 
     it('a] should be called successfully.', function (exit) {
-      var prelodr3 = new Prelodr();
+      var prelodr = new Prelodr();
 
-      prelodr3.in('Starting...').out().
+      prelodr.in('Starting...').out().
               in('Processing...').out().
               in('Finishing...').out(function (done) {
                 done();
@@ -55,9 +108,9 @@ describe('Prelodr', function () {
     });
 
     it('b] (with delay) should be called successfully.', function (exit) {
-      var prelodr3 = new Prelodr();
+      var prelodr = new Prelodr();
 
-      prelodr3.in('Starting...').out().
+      prelodr.in('Starting...').out().
               in('Processing...').out(function (done) {
                 setTimeout(function () {
                   done();

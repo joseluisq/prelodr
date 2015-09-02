@@ -33,7 +33,7 @@ prelodr.out();
 ```
 
 ### Setup
-Constructor supports two params, `container` (it should be a `HMTLElement`, by default is `document.body`) 
+Constructor supports two params, `container` (it should be a `HTMLElement`, by default is `document.body`) 
 and `options` (simple hash object). It's also possible to pass a `options` or `container` only.
 
 ```js

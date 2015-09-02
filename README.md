@@ -32,12 +32,40 @@ prelodr.in('Loading...');
 prelodr.out();
 ```
 
-### Chaining support
-Note: `out(fn)` method supports a optional (fn) callback function.
+### Setup
+Constructor supports two params, `container` (it should be a `HMTLElement`, by default is `document.body`) 
+and `options` (simple hash object). It's also possible to pass a `options` or `container` only.
+
+```js
+// 1) Passing container param only
+var prelodr = new Prelodr(document.getElementById('mycontainer'));
+prelodr.in("Passing container...");
+```
+
+```js
+// 2) Passing a container and options
+var prelodr2 = new Prelodr(document.getElementById('mycontainer'), {
+  prefixClass: 'mypreloader'
+});
+prelodr2.in("Passing container and options...");
+```
+
+```js
+// 3) Passing container or options params only
+var prelodr3 = new Prelodr({
+  prefixClass: 'mypreloader'
+});
+prelodr3.in("Passing options only...");
+
+```
+
+### Async and chaining support
+`out(fn)` method supports an optional (fn) callback function.
 
 ```js
 var prelodr = new Prelodr();
 
+// Step 1
 prelodr.in("Initializing...")
        .out(function(done){
 
@@ -47,7 +75,8 @@ prelodr.in("Initializing...")
           }, 1000);
 
        })
-
+       
+      // Step 2
        .in("Processing...")
        .out(function(done){
 
@@ -57,11 +86,12 @@ prelodr.in("Initializing...")
           }, 3000);
 
        })
-
+        
+      // Step 3
        .in("Closing...").out();
 ```
 
-### jQuery
+### jQuery support
 
 ```js
 $('body').prelodr({
@@ -72,14 +102,15 @@ $('body').prelodr({
   hide: function(){
     console.log('Hide callback')
   }
-})
+});
 
 // a) Show prelodr
-$('body').prelodr('in', 'Processing...')
+$('body').prelodr('in', 'Processing...');
 
 // b) Hide prelodr
-$('body').prelodr('out')
+$('body').prelodr('out');
 ```
+
 
 ## Options
 - `duration` : Timing for show and hide transition.

@@ -77,7 +77,9 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= config.dist %>/<%= pkg.name.toLowerCase() %>.min.js': ['<%= config.src %>/<%= pkg.name.toLowerCase() %>.js']
+          '<%= config.dist %>/<%= pkg.name.toLowerCase() %>.min.js': [
+            '<%= config.src %>/<%= pkg.name.toLowerCase() %>.js'
+          ]
         }
       }
     },

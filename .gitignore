@@ -7,7 +7,8 @@ npm-debug.log
 *.swp
 *.swn
 *.swm
-.DS_STORE
+**/.DS_STORE
+**/.DS_Store
 *#
 *~
 .idea

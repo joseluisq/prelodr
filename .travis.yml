@@ -4,12 +4,10 @@ node_js:
   - '4'
   - '0.12'
   - '0.10'
-before_install: npm install grunt-cli -g
-before_script:
-  - npm install bower -g
-  - bower install
-  - grunt build
+before_install:
+  - npm install grunt-cli bower -g
 after_script:
+  - npm run prepublish
   - npm run codecov
   - npm run coveralls
 notifications:

@@ -53,6 +53,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "bower install",
     "test": "gulp test",
     "coveralls": "cat ./test/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "codecov": "cat ./test/coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js"

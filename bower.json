@@ -18,6 +18,7 @@
     "minimal",
     "responsive",
     "material-design",
+    "ui",
     "jquery-plugin"
   ],
   "dependencies": {

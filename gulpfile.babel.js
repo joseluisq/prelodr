@@ -129,7 +129,7 @@ gulp.task('listen', [
 /**
  * Run test once and exit
  */
-gulp.task('test', done => {
+gulp.task('test', ['default'], done => {
   new KarmaServer({
     configFile: `${__dirname}/karma.conf.js`,
     singleRun: true

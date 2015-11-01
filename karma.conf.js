@@ -18,7 +18,7 @@ module.exports = function (config) {
       'karma-babel-preprocessor'
     ],
     preprocessors: {
-      'lib/{,*/}*.js': ['coverage'],
+      'dist/{,*/}*.js': ['coverage'],
       'test/{,*/}*.spec.js': ['babel']
     },
     reporters: [

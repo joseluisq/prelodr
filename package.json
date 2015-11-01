@@ -38,6 +38,7 @@
     "karma-babel-preprocessor": "^6.0.1",
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
     "karma-spec-reporter": "0.0.22",
     "phantomjs": "^1.9.18",
     "xo": "^0.10.1"

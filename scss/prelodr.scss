@@ -1,5 +1,7 @@
-// Prelodr SCSS
+// Prelodr settings
+
 $prelodr: '.prelodr';
+$prelodr-timing: 2.5s;
 $prelodr-color-green: #0f9d58;
 $prelodr-color-red: #da4733;
 $prelodr-color-blue: #1d6fee;
@@ -21,6 +23,7 @@ $prelodr-color-yellow: #fdba2c;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+  z-index: 100;
 
   // Box wrapper
   > span {
@@ -87,7 +90,7 @@ $prelodr-color-yellow: #fdba2c;
     padding-top: 3px;
     width: 100%;
     background-color: $prelodr-color-green;
-    animation: prelodr-background linear 2.5s infinite;
+    animation: prelodr-background linear #{$prelodr-timing} infinite;
   }
 
   #{$prelodr}-progressbar:before,
@@ -100,7 +103,7 @@ $prelodr-color-yellow: #fdba2c;
     background-color: $prelodr-color-green;
     height: 3px;
     content: '';
-    animation: prelodr-front linear 2.5s infinite;
+    animation: prelodr-front linear #{$prelodr-timing} infinite;
   }
 
   #{$prelodr}-progressbar:before {

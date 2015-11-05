@@ -1,127 +1,14 @@
-/*! Prelodr v1.0.4 | MIT (c) 2015 José Luis Quintana */
+/*! Prelodr v1.0.5 | MIT (c) 2015 José Luis Quintana */
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _typeof(obj) { return obj && obj.constructor === Symbol ? "symbol" : typeof obj; }
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Queu class
- * Simple javascript Queue class implementation
- */
-
-var Queu = (function () {
-
-  /**
-   * Constructor function
-   * @constructor
-   */
-
-  function Queu() {
-    _classCallCheck(this, Queu);
-
-    this.queue = [];
-    this.offset = 0;
-  }
-
-  /**
-   * Get length
-   * @return {Number} - Length
-   */
-
-  _createClass(Queu, [{
-    key: 'getLength',
-    value: function getLength() {
-      return this.queue.length - this.offset;
-    }
-
-    /**
-     * Checks if empty
-     * @return {Boolean} - True is empty and false is not.
-     */
-
-  }, {
-    key: 'isEmpty',
-    value: function isEmpty() {
-      return this.queue.length === 0;
-    }
-
-    /**
-     * Add item to queue
-     * @param  {Object|String|number} - item Item for queue
-     */
-
-  }, {
-    key: 'add',
-    value: function add(item) {
-      this.queue.push(item);
-      this.offset += 1;
-    }
-
-    /**
-     * Remove the first element
-     * @return {Object|String|number} - Return the item
-     */
-
-  }, {
-    key: 'shift',
-    value: function shift() {
-      var item = null;
-
-      if (this.queue.length) {
-        item = this.queue.shift();
-      }
-
-      return item;
-    }
-
-    /**
-     * Remove the last element
-     * @return {Object|String|number} - Return the item
-     */
-
-  }, {
-    key: 'pop',
-    value: function pop() {
-      var item = null;
-
-      if (this.queue.length) {
-        item = this.queue.pop();
-      }
-
-      return item;
-    }
-
-    /**
-     * Get last item
-     * @return {object|string|number} - Last item
-     */
-
-  }, {
-    key: 'last',
-    value: function last() {
-      return this.queue.length > 0 ? this.queue[this.queue.length - 1] : null;
-    }
-
-    /**
-     * Get first item
-     * @return {object|string|number} - First item
-     */
-
-  }, {
-    key: 'first',
-    value: function first() {
-      return this.queue.length > 0 ? this.queue[0] : null;
-    }
-  }]);
-
-  return Queu;
-})();
-
-/**
- * Prelodr v1.0.4
+ * Prelodr v1.0.5
  * http://git.io/prelodr
  *
  * @author    José Luis Quintana | quintana.io
@@ -170,16 +57,28 @@ var Prelodr = (function () {
   }
 
   /**
-   * Marge two hash objects
+   * Set the default options
    *
-   * @param {Object} a - First object
-   * @param {Object} b - Second object
-   * @return {Object}
+   * @param {Object} options - Options object
    */
 
   _createClass(Prelodr, [{
-    key: 'merge',
-    value: function merge(a, b) {
+    key: 'setOptions',
+    value: function setOptions(options) {
+      this.options = this._merge(this.options, options);
+    }
+
+    /**
+     * Marge two hash objects
+     *
+     * @param {Object} a - First object
+     * @param {Object} b - Second object
+     * @return {Object}
+     */
+
+  }, {
+    key: '_merge',
+    value: function _merge(a, b) {
       var i = undefined;
 
       if (b) {
@@ -191,18 +90,6 @@ var Prelodr = (function () {
       }
 
       return a;
-    }
-
-    /**
-     * Set the default options
-     *
-     * @param {Object} options - Options object
-     */
-
-  }, {
-    key: 'setOptions',
-    value: function setOptions(options) {
-      this.options = this.merge(this.options, options);
     }
 
     /**
@@ -223,8 +110,8 @@ var Prelodr = (function () {
      */
 
   }, {
-    key: 'getId',
-    value: function getId() {
+    key: '_getId',
+    value: function _getId() {
       return Math.random().toString(36).slice(2);
     }
 
@@ -236,40 +123,42 @@ var Prelodr = (function () {
      */
 
   }, {
-    key: 'show',
-    value: function show(me, text, cb) {
+    key: '_show',
+    value: function _show(text, cb) {
+      var _this = this;
+
       var span = document.createElement('span');
       var spanText = document.createElement('span');
       var progressbar = document.createElement('span');
 
-      me.element = document.createElement('span');
+      this.element = document.createElement('span');
       spanText.appendChild(document.createTextNode(text));
       span.appendChild(spanText);
       spanText.appendChild(progressbar);
 
-      me.element.appendChild(span);
-      me.container.appendChild(me.element);
+      this.element.appendChild(span);
+      this.container.appendChild(this.element);
 
-      me.element.className = me.options.prefixClass;
-      progressbar.className = me.options.prefixClass + '-progressbar';
+      this.element.className = this.options.prefixClass;
+      progressbar.className = this.options.prefixClass + '-progressbar';
 
       setTimeout(function () {
-        var cls = me.options.prefixClass + ' ' + me.options.prefixClass + '-in';
+        var cls = _this.options.prefixClass + ' ' + _this.options.prefixClass + '-in';
 
-        me.element.className = cls;
+        _this.element.className = cls;
 
         setTimeout(function () {
-          me.isShown = true;
-          me.isAnimating = false;
+          _this.isShown = true;
+          _this.isAnimating = false;
 
-          if (me.options.show) {
-            me.options.show(me, [me.element]);
+          if (_this.options.show) {
+            _this.options.show(_this, _this.element);
           }
 
           if (cb) {
             cb();
           }
-        }, me.options.duration);
+        }, _this.options.duration);
       }, 20);
     }
 
@@ -280,20 +169,22 @@ var Prelodr = (function () {
      */
 
   }, {
-    key: 'hide',
-    value: function hide(me, cb) {
-      if (me.isShown) {
-        me.isShown = false;
+    key: '_hide',
+    value: function _hide(cb) {
+      var _this2 = this;
 
-        if (me.isAnimating) {
-          me.interval = setInterval(function () {
-            if (!me.isAnimating) {
-              clearInterval(me.interval);
-              me.prepOut(cb);
+      if (this.isShown) {
+        this.isShown = false;
+
+        if (this.isAnimating) {
+          this.interval = setInterval(function () {
+            if (!_this2.isAnimating) {
+              clearInterval(_this2.interval);
+              _this2._prepOut(cb);
             }
           }, 20);
         } else {
-          me.prepOut(cb);
+          this._prepOut(cb);
         }
       }
     }
@@ -304,24 +195,24 @@ var Prelodr = (function () {
      */
 
   }, {
-    key: 'queueWalk',
-    value: function queueWalk(me) {
-      var _this = this;
+    key: '_queueWalk',
+    value: function _queueWalk() {
+      var _this3 = this;
 
-      var one = me.queu.first();
+      var one = this.queu.first();
 
       if (one && one.is === 'in') {
         one.fn(function () {
-          me.queu.shift();
-          me.isStart = false;
+          _this3.queu.shift();
+          _this3.isStart = false;
 
-          var next = me.queu.first();
+          var next = _this3.queu.first();
 
           if (next && next.is === 'out') {
-            me.queu.shift();
+            _this3.queu.shift();
 
             next.fn(function () {
-              _this.queueWalk(me);
+              _this3._queueWalk();
             });
           }
         });
@@ -337,13 +228,13 @@ var Prelodr = (function () {
   }, {
     key: 'in',
     value: function _in(text) {
-      var _this2 = this;
+      var _this4 = this;
 
       var obj = {
-        id: this.getId(),
+        id: this._getId(),
         is: 'in',
         fn: function fn(cb) {
-          return _this2.show(_this2, text, cb);
+          return _this4._show(text, cb);
         }
       };
 
@@ -351,7 +242,7 @@ var Prelodr = (function () {
 
       if (!this.isStart) {
         this.isStart = true;
-        this.queueWalk(this);
+        this._queueWalk();
       }
 
       return this;
@@ -365,18 +256,18 @@ var Prelodr = (function () {
   }, {
     key: 'out',
     value: function out(_fn) {
-      var _this3 = this;
+      var _this5 = this;
 
       this.queu.add({
-        id: this.getId(),
+        id: this._getId(),
         is: 'out',
         fn: function fn(cb) {
           if (_fn && typeof _fn === 'function') {
             _fn(function () {
-              _this3.hide(_this3, cb);
+              _this5._hide(cb);
             });
           } else {
-            _this3.hide(_this3, cb);
+            _this5._hide(cb);
           }
         }
       });
@@ -386,8 +277,8 @@ var Prelodr = (function () {
 
         if (one && one.is === 'out') {
           one.fn(function () {
-            _this3.queu.shift();
-            _this3.queueWalk(_this3);
+            _this5.queu.shift();
+            _this5._queueWalk();
           });
         }
       }
@@ -401,9 +292,9 @@ var Prelodr = (function () {
      */
 
   }, {
-    key: 'prepOut',
-    value: function prepOut(cb) {
-      var _this4 = this;
+    key: '_prepOut',
+    value: function _prepOut(cb) {
+      var _this6 = this;
 
       var cls = this.options.prefixClass + ' ' + this.options.prefixClass + '-out';
 
@@ -411,14 +302,14 @@ var Prelodr = (function () {
       this.element.className = cls;
 
       setTimeout(function () {
-        if (_this4.options.hide) {
-          _this4.options.hide(_this4, []);
+        if (_this6.options.hide) {
+          _this6.options.hide(_this6, []);
         }
 
-        _this4.container.removeChild(_this4.element);
-        _this4.element = null;
-        _this4.isAnimating = false;
-        _this4.isShown = false;
+        _this6.container.removeChild(_this6.element);
+        _this6.element = null;
+        _this6.isAnimating = false;
+        _this6.isShown = false;
 
         if (cb) {
           cb();
@@ -441,8 +332,6 @@ var Prelodr = (function () {
 
   return Prelodr;
 })();
-
-// jQuery
 
 (function () {
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {

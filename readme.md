@@ -1,5 +1,5 @@
 # Prelodr
-[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr)  [![Coverage Status](https://img.shields.io/coveralls/quintana-dev/prelodr.svg?style=flat-square)](https://coveralls.io/github/quintana-dev/prelodr?branch=master) [![Inline docs](http://inch-ci.org/github/quintana-dev/prelodr.svg?branch=master&style=flat-square&v2)](http://inch-ci.org/github/quintana-dev/prelodr) [![devDependency Status](https://david-dm.org/quintana-dev/prelodr/dev-status.svg?style=flat-square)](https://david-dm.org/quintana-dev/prelodr#info=devDependencies)
+[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr) [![Inline docs](http://inch-ci.org/github/quintana-dev/prelodr.svg?branch=master&style=flat-square&v2)](http://inch-ci.org/github/quintana-dev/prelodr) [![devDependency Status](https://david-dm.org/quintana-dev/prelodr/dev-status.svg?style=flat-square)](https://david-dm.org/quintana-dev/prelodr#info=devDependencies)
 
 > A simple Material preloader inspired in Google Inbox.
 
@@ -33,7 +33,7 @@ prelodr.out();
 ```
 
 ### Setup
-Constructor supports two params, `container` (it should be a `HTMLElement`, by default is `document.body`) 
+Constructor supports two params, `container` (it should be a `HTMLElement`, by default is `document.body`)
 and `options` (simple hash object). It's also possible to pass a `options` or `container` only.
 
 ```js
@@ -75,7 +75,7 @@ prelodr.in("Initializing...")
           }, 1000);
 
        })
-       
+
       // Step 2
        .in("Processing...")
        .out(function(done){
@@ -86,7 +86,7 @@ prelodr.in("Initializing...")
           }, 3000);
 
        })
-        
+
       // Step 3
        .in("Closing...").out();
 ```
@@ -110,7 +110,6 @@ $('body').prelodr('in', 'Processing...');
 // b) Hide prelodr
 $('body').prelodr('out');
 ```
-
 
 ## Options
 - `duration` : Timing for show and hide transition.
@@ -138,6 +137,9 @@ Hide the prelodr.
 
 ## Changelog
 Check out the [changelog](https://github.com/quintana-dev/prelodr/releases)
+
+## Contributions
+If you would like to contribute [pull requests](https://github.com/quintana-dev/prelodr/pulls) and [issues](https://github.com/quintana-dev/prelodr/issues) will be welcome! Feature requests are welcome. Please before sending some feature requests make sure provide as much detail and context as possible.
 
 ## License
 MIT license

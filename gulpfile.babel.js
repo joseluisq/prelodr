@@ -7,12 +7,13 @@ import header from 'gulp-header';
 import rename from 'gulp-rename';
 import minifyCss from 'gulp-minify-css';
 import uglify from 'gulp-uglify';
-import banner from './lib/mybanner';
-import karma from 'karma';
-// import ava from 'gulp-ava';
+import pkg from './package.json';
+import mocha from 'gulp-mocha';
+
+const banner = `/*! ${pkg.name.charAt(0).toUpperCase()}${pkg.name.slice(1)} v${pkg.version} | ${pkg.license} (c) ${new Date().getFullYear()} ${pkg.author.name} */
+`;
 
 const reload = browserSync.reload;
-const KarmaServer = karma.Server;
 
 // Browser-sync task
 gulp.task('browser-sync', () => {
@@ -75,14 +76,12 @@ gulp.task('sass', () => {
 });
 
 gulp.task('js', () => {
-  return gulp.src('lib/prelodr.js')
+  return gulp.src('lib/{,*/}*.js')
     // Prevent pipe breaking
     .pipe(plumber())
 
     // Babel transpiler
-    .pipe(babel({
-      presets: ['es2015']
-    }))
+    .pipe(babel())
 
     // Inject banner
     .pipe(header(banner))
@@ -129,11 +128,9 @@ gulp.task('listen', [
 /**
  * Run test once and exit
  */
-gulp.task('test', ['default'], done => {
-  new KarmaServer({
-    configFile: `${__dirname}/karma.conf.js`,
-    singleRun: true
-  }, done).start();
+gulp.task('test', () => {
+  return gulp.src('test/{,*/}*.spec.js', {read: false})
+    .pipe(mocha({timeout: 12000}));
 });
 
 // Watch task

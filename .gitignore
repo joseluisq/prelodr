@@ -17,6 +17,6 @@ nbproject
 .temp
 .sass-cache
 .node_history
-test/coverage
+coverage
 
 temp

@@ -2,12 +2,7 @@ sudo: false
 language: node_js
 node_js:
   - '4'
-  - '0.12'
-  - '0.10'
 before_install:
-  - npm install grunt-cli bower -g
-after_script:
-  - npm run codecov
-  - npm run coveralls
+  - npm install gulp bower -g
 notifications:
   email: false

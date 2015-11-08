@@ -52,7 +52,7 @@ var Prelodr = (function () {
         this.setOptions(container);
       }
     } else {
-      this.container = document.body;
+      this.container = window.document.body;
     }
   }
 
@@ -127,12 +127,12 @@ var Prelodr = (function () {
     value: function _show(text, cb) {
       var _this = this;
 
-      var span = document.createElement('span');
-      var spanText = document.createElement('span');
-      var progressbar = document.createElement('span');
+      var span = window.document.createElement('span');
+      var spanText = window.document.createElement('span');
+      var progressbar = window.document.createElement('span');
 
-      this.element = document.createElement('span');
-      spanText.appendChild(document.createTextNode(text));
+      this.element = window.document.createElement('span');
+      spanText.appendChild(window.document.createTextNode(text));
       span.appendChild(spanText);
       spanText.appendChild(progressbar);
 
@@ -202,6 +202,8 @@ var Prelodr = (function () {
       var one = this.queu.first();
 
       if (one && one.is === 'in') {
+        this.isShown = true;
+
         one.fn(function () {
           _this3.queu.shift();
           _this3.isStart = false;
@@ -334,7 +336,7 @@ var Prelodr = (function () {
 })();
 
 (function () {
-  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && _typeof(module.exports) === 'object') {
     module.exports = Prelodr;
   } else if (typeof define === 'function' && define.amd) {
     define([], function () {

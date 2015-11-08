@@ -8,10 +8,11 @@
     "url": "git://github.com/quintana-dev/prelodr.git"
   },
   "license": "MIT",
-  "authors": [
-    "José Luis Quintana <joseluisquintana20@gmail.com>"
-  ],
-  "main": "./lib/prelodr.js",
+  "author": {
+    "name": "José Luis Quintana",
+    "url": "http://quintana.io"
+  },
+  "main": "./dist/prelodr.js",
   "moduleType": "globals",
   "keywords": [
     "preloader",

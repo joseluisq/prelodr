@@ -8,7 +8,6 @@ import rename from 'gulp-rename';
 import minifyCss from 'gulp-minify-css';
 import uglify from 'gulp-uglify';
 import pkg from './package.json';
-import mocha from 'gulp-mocha';
 
 const banner = `/*! ${pkg.name.charAt(0).toUpperCase()}${pkg.name.slice(1)} v${pkg.version} | ${pkg.license} (c) ${new Date().getFullYear()} ${pkg.author.name} */
 `;
@@ -123,14 +122,6 @@ gulp.task('listen', [
   gulp.watch('scss/{,*/}*.{scss,sass}', ['sass']);
   gulp.watch('lib/{,*/}*.js', ['js']);
   gulp.watch('examples/{,*/}*.html', ['html']);
-});
-
-/**
- * Run test once and exit
- */
-gulp.task('test', () => {
-  return gulp.src('test/{,*/}*.spec.js', {read: false})
-    .pipe(mocha({timeout: 12000}));
 });
 
 // Watch task

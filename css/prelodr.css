@@ -14,7 +14,8 @@
   cursor: default;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease;
+  z-index: 100; }
   .prelodr > span {
     position: relative;
     display: table-cell;

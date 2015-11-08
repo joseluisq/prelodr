@@ -1,179 +1,174 @@
-import chai from 'chai';
-import jsdom from 'jsdom';
+import test from 'tape';
+import {jsdom} from 'jsdom';
 import Queu from '../lib/queu';
 import Prelodr from '../lib/prelodr';
 
-const assert = chai.assert;
-const expect = chai.expect;
-
-global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+global.document = jsdom('<!doctype html><html><body></body></html>');
 global.window = document.defaultView;
 global.Queu = Queu;
 
-describe('Prelodr', () => {
-  // Basic usage
-  describe('Definition', () => {
-    it('class should be instanced successfully.', () => {
-      const prelodr = new Prelodr();
-      expect(prelodr).to.be.an.instanceof(Prelodr);
-    });
+test('show(pre, el) callback', t => {
+  t.plan(2);
+
+  const prelodr = new Prelodr({
+    show: (pre, el) => {
+      const span = document.createElement('span');
+
+      t.ok(pre, 'First param should be ok by default.');
+      t.equal(el.tagName, span.tagName, 'Second param should be equal to span element by default.');
+    }
   });
 
-  // Callbacks
-  describe('Callbacks', () => {
-    it('show() callback should be called successfully.', done => {
-      const prelodr = new Prelodr({
-        show: (pre, el) => {
-          const element = document.createElement('span');
+  prelodr.in('Loading...');
+});
 
-          expect(pre).not.to.be.null;
-          assert.equal(el.tagName, element.tagName);
-          expect(pre).to.be.an.instanceof(Prelodr);
-          done();
-        }
-      });
+test('hide(el) callback', t => {
+  t.plan(1);
 
-      prelodr.in('Loading...');
-    });
-
-    it('hide() callback should be called successfully.', done => {
-      const prelodr = new Prelodr({
-        hide: pre => {
-          expect(pre).not.to.be.null;
-          expect(pre).to.be.an.instanceof(Prelodr);
-          done();
-        }
-      });
-
-      prelodr.in('Loading...');
-      prelodr.out();
-    });
+  const prelodr = new Prelodr({
+    hide: pre => t.ok(pre, 'First param should be ok.')
   });
 
-  // Methods
-  describe('Methods', () => {
-    const prelodr = new Prelodr();
+  prelodr.in('Loading...').out();
+});
 
-    // setOptions()
-    it('setOptions()', () => {
-      const opts = {
-        duration: 100,
-        prefixClass: 'cls'
-      };
+test('setOptions(opts) method', t => {
+  t.plan(5);
 
-      prelodr.setOptions(opts);
-      assert.isNotNull(prelodr.options);
-      assert.isObject(prelodr.options);
-      expect(prelodr.options).to.include.keys('hide');
-      expect(prelodr.options).to.include.keys('show');
-      assert.equal(prelodr.options.duration, 100);
-      assert.equal(prelodr.options.prefixClass, 'cls');
-    });
+  const prelodr = new Prelodr();
+  const opts = {
+    duration: 100,
+    prefixClass: 'cls'
+  };
 
-    // setContainer()
-    it('setContainer()', () => {
-      let container = prelodr.container;
-      expect(container).to.not.be.null;
-      assert.equal(container.tagName.toLowerCase(), 'body');
+  prelodr.setOptions(opts);
 
-      const element = document.createElement('span');
-      prelodr.setContainer(element);
-      container = prelodr.container;
-      assert.equal(container.tagName, element.tagName);
-    });
+  t.ok(prelodr.options, 'Options should be ok by default.');
+  t.equal(prelodr.options.show, null, 'Options.show should be equal to null by default.');
+  t.equal(prelodr.options.hide, null, 'Options.hide should be equal to null by default.');
+  t.equal(prelodr.options.duration, opts.duration, 'Options.duration should be equal to default value.');
+  t.equal(prelodr.options.prefixClass, opts.prefixClass, 'Options.show should be equal to default value.');
+});
 
-    // in()
-    it('in()', () => {
-      const pre = prelodr.in('Loading...');
-      expect(pre).not.to.be.null;
-      expect(pre).to.be.an.instanceof(Prelodr);
-    });
+test('setContainer(opts) method', t => {
+  t.plan(3);
 
-    // isVisible()
-    it('isVisible() : true', () => {
-      const visibility = prelodr.isVisible();
-      expect(visibility).not.to.be.ok;
-      expect(visibility).to.be.false;
-    });
+  const prelodr = new Prelodr();
+  let container = prelodr.container;
 
-    // merge()
-    it('_merge()', () => {
-      const three = prelodr._merge({one: 1}, {two: 2});
+  t.ok(container, 'Options should be ok.');
+  t.equal(container.tagName.toLowerCase(), 'body', 'Container tagName should be equal to body tagName.');
 
-      assert.isNotNull(prelodr.options);
-      assert.isObject(prelodr.options);
-      expect(three).to.include.keys('one');
-      expect(three).to.include.keys('two');
-    });
+  const span = document.createElement('span');
+  prelodr.setContainer(span);
+  container = prelodr.container;
 
-    // _getId()
-    it('_getId()', () => {
-      const one = prelodr._getId();
-      const two = prelodr._getId();
+  t.equal(container.tagName, span.tagName, 'Container tagName should be equal to span element.');
+});
 
-      assert.isString(one);
-      assert.isString(two);
-      assert.notEqual(one, two);
-    });
+test('in(str) method', t => {
+  t.plan(1);
 
-    // _show()
-    it('_show()', done => {
-      prelodr._show('Showing...', done);
-    });
+  const prelodr = new Prelodr();
+  const pre = prelodr.in('Loading...');
 
-    // _hide()
-    it('_hide()', done => {
-      prelodr._hide(done);
-    });
+  t.ok(pre, 'Returned value should be ok.');
+});
 
-    // _queueWalk()
-    it('_queueWalk()', () => {
-      const one = prelodr._queueWalk();
-      assert.isUndefined(one);
-    });
+test('out(fn) method', t => {
+  t.plan(1);
 
-    // _prepOut()
-    it('_prepOut()', done => {
-      prelodr.in('Loading...');
-      prelodr._prepOut(() => {
-        done();
-      });
-    });
+  const prelodr = new Prelodr();
 
-    // out()
-    it('out()', done => {
-      prelodr.out(pre => {
-        expect(pre).not.to.be.null;
-        expect(pre).to.be.an.instanceof(Function);
-        done();
-      });
-    });
+  prelodr.out(pre => {
+    t.ok(pre, 'Returned value should be ok.');
   });
+});
 
-  // Async and chaining support
-  describe('Async and chaining support', () => {
-    //
-    it('a) should be called successfully.', exit => {
-      const prelodr = new Prelodr();
+test('isVisible() method', t => {
+  t.plan(2);
 
-      prelodr.in('Starting...').out()
-        .in('Processing...').out()
-        .in('Finishing...').out(done => {
-          done();
-          exit();
-        });
+  const prelodr = new Prelodr();
+  let visible = prelodr.isVisible();
+
+  t.false(visible, 'Returned value should be false by default.');
+
+  prelodr.in('Loading...');
+  visible = prelodr.isVisible();
+
+  t.true(visible, 'Returned value should be true.');
+});
+
+test('_merge() method', t => {
+  t.plan(3);
+
+  const prelodr = new Prelodr();
+  const merged = prelodr._merge({one: true}, {two: true});
+
+  t.ok(merged, 'Returned value should be ok.');
+  t.true(merged.one, 'First value should be true.');
+  t.true(merged.two, 'Second value should be true.');
+});
+
+test('_getId() method', t => {
+  t.plan(3);
+
+  const prelodr = new Prelodr();
+  const one = prelodr._getId();
+  const two = prelodr._getId();
+
+  t.ok(one, 'First value should be true.');
+  t.ok(two, 'Second value should be true.');
+  t.notEqual(one, two, `First and second values shouldn't be equal.`);
+});
+
+test('_show() method', t => {
+  t.plan(1);
+
+  const prelodr = new Prelodr();
+  prelodr._show('Opening...', t.ok(1, 'should be called successfully.'));
+});
+
+test('_hide() method', t => {
+  t.plan(1);
+
+  const prelodr = new Prelodr();
+  prelodr._show('Closing...', t.ok(1, 'should be called successfully.'));
+});
+
+test('_prepOut() method', t => {
+  t.plan(1);
+
+  const prelodr = new Prelodr();
+  prelodr.in('Loading...');
+  prelodr._prepOut(t.ok(1, 'should be called successfully.'));
+});
+
+test('_queueWalk() method', t => {
+  t.plan(1);
+
+  const prelodr = new Prelodr();
+  const queue = prelodr._queueWalk();
+
+  t.notOk(queue, `shouldn't be ok by default.`);
+});
+
+test('Async and chaining actions', t => {
+  t.plan(3);
+
+  const prelodr = new Prelodr();
+
+  prelodr
+    .in('Starting...').out(done => {
+      t.ok(1, 'Starting action should be called successfully.');
+      done();
+    })
+    .in('Processing...').out(done => {
+      t.ok(1, 'Processing action should be called successfully.');
+      done();
+    })
+    .in('Finishing...').out(done => {
+      t.ok(1, 'Finishing action should be called successfully.');
+      done();
     });
-
-    it('b) (with delay) should be called successfully.', exit => {
-      const prelodr = new Prelodr();
-
-      prelodr.in('Starting...').out()
-      .in('Processing...').out(done =>
-        setTimeout(() => done(), 1000))
-          .in('Finishing...').out(done => {
-            done();
-            exit();
-          });
-    });
-  });
 });

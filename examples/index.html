@@ -105,7 +105,8 @@
         $btnPreloadr.addEventListener("click", function() {
 
           // Show prelodr (Chaining support)
-          prelodr.in("Starting...").out()
+          prelodr.in("Starting...")
+          .out()
                   .in("Processing...").out(function (done) {
                     setTimeout(function () {
                       done();

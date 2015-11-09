@@ -32,12 +32,38 @@ var Prelodr = (function () {
   function Prelodr(container, options) {
     _classCallCheck(this, Prelodr);
 
-    this.queu = new Queu();
+    this.queu = {
+      queue: [],
+      offset: 0,
+      add: function add(el) {
+        this.queue.push(el);
+        this.offset += 1;
+      },
+      shift: function shift() {
+        var el = null;
+
+        if (this.queue.length > 0) {
+          el = this.queue.shift();
+        }
+
+        return el;
+      },
+      first: function first() {
+        var el = null;
+
+        if (this.queue.length > 0) {
+          el = this.queue[0];
+        }
+
+        return el;
+      }
+    };
+    this._interval = 0;
     this.isShown = false;
     this.isAnimating = false;
     this.isStart = false;
     this.options = {
-      duration: 700,
+      duration: 750,
       prefixClass: 'prelodr',
       show: null,
       hide: null
@@ -127,29 +153,33 @@ var Prelodr = (function () {
     value: function _show(text, cb) {
       var _this = this;
 
-      var span = window.document.createElement('span');
+      this.wrapper = window.document.createElement('span');
+
       var spanText = window.document.createElement('span');
       var progressbar = window.document.createElement('span');
 
-      this.element = window.document.createElement('span');
       spanText.appendChild(window.document.createTextNode(text));
-      span.appendChild(spanText);
+      this.wrapper.appendChild(spanText);
       spanText.appendChild(progressbar);
-
-      this.element.appendChild(span);
-      this.container.appendChild(this.element);
-
-      this.element.className = this.options.prefixClass;
       progressbar.className = this.options.prefixClass + '-progressbar';
+
+      if (!this.element) {
+        this.element = window.document.createElement('span');
+        this.element.className = this.options.prefixClass;
+        this.container.appendChild(this.element);
+      }
+
+      this.element.appendChild(this.wrapper);
 
       setTimeout(function () {
         var cls = _this.options.prefixClass + ' ' + _this.options.prefixClass + '-in';
-
+        _this.wrapper.children[0].className = _this.options.prefixClass + '-in';
         _this.element.className = cls;
 
         setTimeout(function () {
           _this.isShown = true;
           _this.isAnimating = false;
+          _this.queu.shift();
 
           if (_this.options.show) {
             _this.options.show(_this, _this.element);
@@ -159,7 +189,7 @@ var Prelodr = (function () {
             cb();
           }
         }, _this.options.duration);
-      }, 20);
+      }, 10);
     }
 
     /**
@@ -171,21 +201,9 @@ var Prelodr = (function () {
   }, {
     key: '_hide',
     value: function _hide(cb) {
-      var _this2 = this;
-
       if (this.isShown) {
         this.isShown = false;
-
-        if (this.isAnimating) {
-          this.interval = setInterval(function () {
-            if (!_this2.isAnimating) {
-              clearInterval(_this2.interval);
-              _this2._prepOut(cb);
-            }
-          }, 20);
-        } else {
-          this._prepOut(cb);
-        }
+        this._prepOut(cb);
       }
     }
 
@@ -197,7 +215,7 @@ var Prelodr = (function () {
   }, {
     key: '_queueWalk',
     value: function _queueWalk() {
-      var _this3 = this;
+      var _this2 = this;
 
       var one = this.queu.first();
 
@@ -205,16 +223,12 @@ var Prelodr = (function () {
         this.isShown = true;
 
         one.fn(function () {
-          _this3.queu.shift();
-          _this3.isStart = false;
-
-          var next = _this3.queu.first();
+          var next = _this2.queu.first();
+          _this2.isStart = false;
 
           if (next && next.is === 'out') {
-            _this3.queu.shift();
-
             next.fn(function () {
-              _this3._queueWalk();
+              _this2._queueWalk();
             });
           }
         });
@@ -230,13 +244,13 @@ var Prelodr = (function () {
   }, {
     key: 'in',
     value: function _in(text) {
-      var _this4 = this;
+      var _this3 = this;
 
       var obj = {
         id: this._getId(),
         is: 'in',
         fn: function fn(cb) {
-          return _this4._show(text, cb);
+          return _this3._show(text, cb);
         }
       };
 
@@ -258,7 +272,7 @@ var Prelodr = (function () {
   }, {
     key: 'out',
     value: function out(_fn) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.queu.add({
         id: this._getId(),
@@ -266,10 +280,10 @@ var Prelodr = (function () {
         fn: function fn(cb) {
           if (_fn && typeof _fn === 'function') {
             _fn(function () {
-              _this5._hide(cb);
+              _this4._hide(cb);
             });
           } else {
-            _this5._hide(cb);
+            _this4._hide(cb);
           }
         }
       });
@@ -278,10 +292,7 @@ var Prelodr = (function () {
         var one = this.queu.first();
 
         if (one && one.is === 'out') {
-          one.fn(function () {
-            _this5.queu.shift();
-            _this5._queueWalk();
-          });
+          one.fn(this._queueWalk);
         }
       }
 
@@ -296,22 +307,33 @@ var Prelodr = (function () {
   }, {
     key: '_prepOut',
     value: function _prepOut(cb) {
-      var _this6 = this;
-
-      var cls = this.options.prefixClass + ' ' + this.options.prefixClass + '-out';
+      var _this5 = this;
 
       this.isAnimating = true;
-      this.element.className = cls;
+      this.queu.shift();
+
+      var el = this.queu.first();
+      this.wrapper.children[0].className = '';
 
       setTimeout(function () {
-        if (_this6.options.hide) {
-          _this6.options.hide(_this6, []);
+        if (_this5.options.hide) {
+          _this5.options.hide(_this5, []);
         }
 
-        _this6.container.removeChild(_this6.element);
-        _this6.element = null;
-        _this6.isAnimating = false;
-        _this6.isShown = false;
+        if (el) {
+          _this5.element.removeChild(_this5.wrapper);
+        } else {
+          var cls = _this5.options.prefixClass + ' ' + _this5.options.prefixClass + '-out';
+          _this5.element.className = cls;
+
+          setTimeout(function () {
+            _this5.container.removeChild(_this5.element);
+            _this5.element = null;
+          }, _this5.options.duration / 1.5);
+        }
+
+        _this5.isAnimating = false;
+        _this5.isShown = false;
 
         if (cb) {
           cb();
@@ -336,37 +358,39 @@ var Prelodr = (function () {
 })();
 
 (function () {
+  /* istanbul ignore else */
   if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && _typeof(module.exports) === 'object') {
     module.exports = Prelodr;
+    /* istanbul ignore else */
   } else if (typeof define === 'function' && define.amd) {
-    define([], function () {
-      return Prelodr;
-    });
-  } else {
-    window.Prelodr = Prelodr;
+      define([], function () {
+        return Prelodr;
+      });
+    } else {
+      window.Prelodr = Prelodr;
 
-    if (window.jQuery) {
-      window.jQuery.fn.prelodr = function (options) {
-        var fn = undefined;
-        var prelodr = undefined;
+      if (window.jQuery) {
+        window.jQuery.fn.prelodr = function (options) {
+          var fn = undefined;
+          var prelodr = undefined;
 
-        if (typeof options === 'string') {
-          prelodr = this.data('prelodr');
-          fn = prelodr[options];
+          if (typeof options === 'string') {
+            prelodr = this.data('prelodr');
+            fn = prelodr[options];
 
-          if (prelodr !== 'undefined' && typeof options === 'string' && fn) {
-            return fn.apply(prelodr, Array.prototype.slice.call(arguments, 1));
+            if (prelodr !== 'undefined' && typeof options === 'string' && fn) {
+              return fn.apply(prelodr, Array.prototype.slice.call(arguments, 1));
+            }
+
+            var str = 'Method ' + options + ' is not supported by jQuery.prelodr.';
+            window.jQuery.error(str);
+          } else {
+            prelodr = new window.Prelodr(this[0], options);
+            this.data('prelodr', prelodr);
           }
 
-          var str = 'Method ' + options + ' is not supported by jQuery.prelodr.';
-          window.jQuery.error(str);
-        } else {
-          prelodr = new window.Prelodr(this[0], options);
-          this.data('prelodr', prelodr);
-        }
-
-        return this;
-      };
+          return this;
+        };
+      }
     }
-  }
 })();

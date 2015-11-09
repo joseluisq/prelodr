@@ -14,7 +14,7 @@
   cursor: default;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 100; }
   .prelodr > span {
     position: relative;
@@ -38,25 +38,19 @@
     opacity: 0;
     visibility: hidden;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
-    transition: all 0.3s ease;
-    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0.95);
     transition-delay: .2s;
     border-radius: 3px; }
   .prelodr.prelodr-in {
     opacity: 1;
     visibility: visible; }
-  .prelodr.prelodr-in > span > span {
+  .prelodr.prelodr-out {
+    opacity: 0; }
+  .prelodr > span > span.prelodr-in {
     opacity: 1;
     visibility: visible;
     transform: scale(1); }
-  .prelodr.prelodr-out {
-    opacity: 0;
-    visibility: hidden;
-    transition-delay: .35s; }
-  .prelodr.prelodr-out > span > span {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.8); }
   .prelodr .prelodr-progressbar {
     position: absolute;
     bottom: 0;

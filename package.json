@@ -45,10 +45,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall": "bower install",
-    "test": "babel-node ./test/prelodr.spec.js | tspec && babel-node ./test/prelodr.spec.js | tspec",
-    "coverage": "BABEL_ENV=browser babel-node `npm bin`/isparta cover --report lcov --report html --report text ./test/prelodr.spec.js | tspec",
-    "coveralls": "npm run coverage && coveralls < ./coverage/lcov.info"
+    "test": "BABEL_ENV=browser babel-node `npm bin`/isparta cover --report lcov --report html --report text ./test/prelodr.spec.js | tspec",
+    "coveralls": "coveralls < ./coverage/lcov.info"
   },
   "bugs": {
     "url": "https://github.com/quintana-dev/prelodr/issues"

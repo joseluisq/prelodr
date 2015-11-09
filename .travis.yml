@@ -3,7 +3,9 @@ language: node_js
 node_js:
   - '4'
 before_install:
-  - npm i gulp bower -g
+  - npm i bower -g
+after_install:
+  - bower install
 after_script:
   - npm run coveralls
 notifications:

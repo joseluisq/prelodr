@@ -6,6 +6,7 @@ $prelodr-color-green: #0f9d58;
 $prelodr-color-red: #da4733;
 $prelodr-color-blue: #1d6fee;
 $prelodr-color-yellow: #fdba2c;
+$prelodr-zindex: 100;
 
 #{$prelodr} {
   position: fixed;
@@ -22,8 +23,8 @@ $prelodr-color-yellow: #fdba2c;
   cursor: default;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 100;
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  z-index: $prelodr-zindex;
 
   // Box wrapper
   > span {
@@ -51,8 +52,8 @@ $prelodr-color-yellow: #fdba2c;
     opacity: 0;
     visibility: hidden;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 5px 0px rgba(0,0,0,0.23);
-    transition: all 0.3s ease;
-    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    transform: scale(0.95);
     transition-delay: .2s;
     border-radius: 3px;
   }
@@ -63,23 +64,15 @@ $prelodr-color-yellow: #fdba2c;
     visibility: visible;
   }
 
-  &#{$prelodr}-in > span > span {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-  }
-
   // Out effect
   &#{$prelodr}-out {
     opacity: 0;
-    visibility: hidden;
-    transition-delay: .35s;
   }
 
-  &#{$prelodr}-out > span > span {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.8);
+  & > span > span#{$prelodr}-in {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
   }
 
   // Progressbar

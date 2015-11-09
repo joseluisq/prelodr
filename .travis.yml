@@ -4,7 +4,7 @@ node_js:
   - '4'
 before_install:
   - npm i bower -g
-after_install:
+before_script:
   - bower install
 after_script:
   - npm run coveralls

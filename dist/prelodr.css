@@ -1,4 +1,4 @@
-/*! Prelodr v1.0.5 | MIT (c) 2015 José Luis Quintana */
+/*! Prelodr v1.0.6 | MIT (c) 2015 José Luis Quintana */
 .prelodr {
   position: fixed;
   display: table;
@@ -6,8 +6,7 @@
   width: 100%;
   left: 0;
   top: 0;
-  background-color: #f5f5f5;
-  background-color: rgba(225, 225, 225, 0.9);
+  background-color: rgba(225, 225, 225, 0.75);
   font-family: Arial, sans-serif;
   font-size: 16px;
   overflow: hidden;

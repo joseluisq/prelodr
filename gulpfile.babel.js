@@ -9,10 +9,16 @@ import minifyCss from 'gulp-minify-css';
 import uglify from 'gulp-uglify';
 import pkg from './package.json';
 
+const reload = browserSync.reload;
 const banner = `/*! ${pkg.name.charAt(0).toUpperCase()}${pkg.name.slice(1)} v${pkg.version} | ${pkg.license} (c) ${new Date().getFullYear()} ${pkg.author.name} */
 `;
-
-const reload = browserSync.reload;
+const opts = {
+  destDir: 'dist',
+  examplesDir: 'examples',
+  jsSrc: 'lib/{,*/}*.js',
+  htmlSrc: 'examples/{,*/}*.html',
+  sassSrc: 'scss/{,*/}*.scss'
+};
 
 // Browser-sync task
 gulp.task('browser-sync', () => {
@@ -25,91 +31,72 @@ gulp.task('browser-sync', () => {
       }
     },
     server: {
-      files: [
-        'examples/{,*/}*.html',
-        'css/{,*/}*.css'
-      ],
       baseDir: [
-        './dist',
-        './css',
-        './examples'
-      ],
-      routes: {
-        '/': './examples',
-        '/dist': './dist',
-        '/css': './css',
-        '/bower_components': './bower_components'
-      }
+        opts.destDir,
+        opts.examplesDir,
+        'bower_components'
+      ]
     }
   });
 });
 
 // Sass task
 gulp.task('sass', () => {
-  return gulp.src('scss/{,*/}*.{scss,sass}')
+  const pipe = gulp.src(opts.sassSrc)
     // Prevent pipe breaking
     .pipe(plumber())
-
     // Compile sass
     .pipe(sass({includePaths: ['scss']}))
-
     // Inject banner
     .pipe(header(banner))
-
     // Write expanded css
-    .pipe(gulp.dest('css'))
-
+    .pipe(gulp.dest(opts.destDir))
     // Minify
     .pipe(minifyCss())
-
     // Rename to min file
     .pipe(rename({
       suffix: '.min'
     }))
-
     // Write Minified file
-    .pipe(gulp.dest('css'))
-
+    .pipe(gulp.dest(opts.destDir))
     // Inject into browsers
     .pipe(reload({stream: true}));
+
+  return pipe;
 });
 
 gulp.task('js', () => {
-  return gulp.src('lib/{,*/}*.js')
+  const pipe = gulp.src(opts.jsSrc)
     // Prevent pipe breaking
     .pipe(plumber())
-
     // Babel transpiler
     .pipe(babel())
-
     // Inject banner
     .pipe(header(banner))
-
     // Write expanded js
-    .pipe(gulp.dest('dist'))
-
+    .pipe(gulp.dest(opts.destDir))
     // Minify
     .pipe(uglify())
-
     // Inject banner
     .pipe(header(banner))
-
     // Rename to min file
     .pipe(rename({
       suffix: '.min'
     }))
-
     // Write Minified file
-    .pipe(gulp.dest('dist'))
-
+    .pipe(gulp.dest(opts.destDir))
     // Inject into browsers
     .pipe(reload({stream: true}));
+
+  return pipe;
 });
 
 gulp.task('html', () => {
-  return gulp.src('examples/{,*/}*.html')
+  const pipe = gulp.src(opts.htmlSrc)
     // Inject into browsers
     .pipe(reload({stream: true}));
+
+  return pipe;
 });
 
 // Listen task
@@ -119,9 +106,9 @@ gulp.task('listen', [
   'html',
   'browser-sync'
 ], () => {
-  gulp.watch('scss/{,*/}*.{scss,sass}', ['sass']);
-  gulp.watch('lib/{,*/}*.js', ['js']);
-  gulp.watch('examples/{,*/}*.html', ['html']);
+  gulp.watch(opts.sassSrc, ['sass']);
+  gulp.watch(opts.jsSrc, ['js']);
+  gulp.watch(opts.htmlSrc, ['html']);
 });
 
 // Watch task

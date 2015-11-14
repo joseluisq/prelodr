@@ -1,5 +1,5 @@
 # Prelodr
-[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr) [![Coverage Status](https://img.shields.io/coveralls/quintana-dev/prelodr.svg?style=flat-square)](https://coveralls.io/github/quintana-dev/prelodr?branch=master) [![devDependency Status](https://david-dm.org/quintana-dev/prelodr/dev-status.svg?style=flat-square)](https://david-dm.org/quintana-dev/prelodr#info=devDependencies) 
+[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr) [![Coverage Status](https://img.shields.io/coveralls/quintana-dev/prelodr.svg?style=flat-square)](https://coveralls.io/github/quintana-dev/prelodr?branch=master) [![devDependency Status](https://david-dm.org/quintana-dev/prelodr/dev-status.svg?style=flat-square)](https://david-dm.org/quintana-dev/prelodr#info=devDependencies)
 
 > A simple Material preloader inspired in Google Inbox.
 
@@ -11,7 +11,7 @@
 **Bower**
 
 ```sh
-$ bower install --save prelodr
+$ bower install prelodr --save
 ```
 
 **Npm**
@@ -39,7 +39,7 @@ and `options` (simple hash object). It's also possible to pass a `options` or `c
 ```js
 // 1) Passing container param only
 var prelodr = new Prelodr(document.getElementById('mycontainer'));
-prelodr.in("Passing container...");
+prelodr.in('Passing container...');
 ```
 
 ```js
@@ -47,7 +47,7 @@ prelodr.in("Passing container...");
 var prelodr2 = new Prelodr(document.getElementById('mycontainer'), {
   prefixClass: 'mypreloader'
 });
-prelodr2.in("Passing container and options...");
+prelodr2.in('Passing container and options...');
 ```
 
 ```js
@@ -55,7 +55,7 @@ prelodr2.in("Passing container and options...");
 var prelodr3 = new Prelodr({
   prefixClass: 'mypreloader'
 });
-prelodr3.in("Passing options only...");
+prelodr3.in('Passing options only...');
 
 ```
 
@@ -66,10 +66,10 @@ prelodr3.in("Passing options only...");
 var prelodr = new Prelodr();
 
 // Step 1
-prelodr.in("Initializing...")
+prelodr.in('Initializing...')
        .out(function(done){
 
-          console.info(" 1 second delay... ");
+          console.info(' 1 second delay... ');
           setTimeout(function(){
             done();
           }, 1000);
@@ -77,10 +77,10 @@ prelodr.in("Initializing...")
        })
 
       // Step 2
-       .in("Processing...")
+       .in('Processing...')
        .out(function(done){
 
-          console.info(" 2 seconds delay... ");
+          console.info(' 2 seconds delay... ');
           setTimeout(function(){
             done();
           }, 3000);
@@ -88,7 +88,7 @@ prelodr.in("Initializing...")
        })
 
       // Step 3
-       .in("Closing...").out();
+       .in('Closing...').out();
 ```
 
 ### jQuery support

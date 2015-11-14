@@ -1,4 +1,5 @@
 // Prelodr settings
+// -> You can customize styles on demand here.
 
 $prelodr: '.prelodr';
 $prelodr-timing: 2.5s;
@@ -6,6 +7,7 @@ $prelodr-color-green: #0f9d58;
 $prelodr-color-red: #da4733;
 $prelodr-color-blue: #1d6fee;
 $prelodr-color-yellow: #fdba2c;
+$prelodr-overlay-color: rgba(225, 225, 225, 0.75);
 $prelodr-zindex: 100;
 
 #{$prelodr} {
@@ -15,8 +17,7 @@ $prelodr-zindex: 100;
   width: 100%;
   left: 0;
   top: 0;
-  background-color: #f5f5f5;
-  background-color: rgba(225, 225, 225, 0.9);
+  background-color: $prelodr-overlay-color;
   font-family: Arial, sans-serif;
   font-size: 16px;
   overflow: hidden;

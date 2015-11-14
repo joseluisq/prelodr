@@ -2,6 +2,7 @@ sudo: false
 language: node_js
 node_js:
   - '4'
+  - '5'
 before_install:
   - npm i bower -g
 before_script:

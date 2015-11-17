@@ -8,16 +8,24 @@
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)
 
 ## Install
-**Bower**
+### Bower
 
 ```sh
 $ bower install prelodr --save
 ```
 
-**Npm**
+### Npm
 
 ```sh
-$ npm install prelodr
+$ npm install prelodr --save-dev
+```
+
+### CDN
+Hosted by [jsDelivr](https://www.jsdelivr.com/)
+
+```html
+<!-- Latest compiled and minified prelodr.js -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/prelodr/latest/prelodr.min.js">
 ```
 
 ## Usage

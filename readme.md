@@ -8,19 +8,19 @@
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)
 
 ## Install
-### Bower
+#### Bower
 
 ```sh
 $ bower install prelodr --save
 ```
 
-### Npm
+#### Npm
 
 ```sh
 $ npm install prelodr --save-dev
 ```
 
-### CDN
+#### CDN
 Hosted by [jsDelivr](https://www.jsdelivr.com/)
 
 ```html

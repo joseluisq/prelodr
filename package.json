@@ -45,20 +45,16 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "BABEL_ENV=browser babel-node `npm bin`/isparta cover --report lcov --report html --report text ./test/prelodr.spec.js | tspec",
+    "test": "babel-node `npm bin`/isparta cover --report lcov --report html --report text ./test/prelodr.spec.js | tspec",
     "coveralls": "coveralls < ./coverage/lcov.info"
   },
   "bugs": {
     "url": "https://github.com/quintana-dev/prelodr/issues"
   },
   "babel": {
-    "env": {
-      "development": {
-        "presets": [
-          "es2015"
-        ]
-      }
-    }
+    "presets": [
+      "es2015"
+    ]
   },
   "xo": {
     "space": true,

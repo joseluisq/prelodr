@@ -1,7 +1,7 @@
 {
   "title": "Prelodr",
   "name": "prelodr",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "description": "A simple Material preloader inspired in Google Inbox",
   "keywords": [
     "preloader",
@@ -18,50 +18,49 @@
   },
   "author": {
     "name": "José Luis Quintana",
-    "url": "http://quintana.io"
+    "url": "http://git.io/joseluisq"
+  },
+  "dependencies": {
+    "emitus": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.1.18",
-    "babel-core": "^6.1.21",
-    "babel-preset-es2015": "^6.1.18",
-    "browser-sync": "^2.10.0",
-    "coveralls": "^2.11.4",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.0",
-    "gulp-header": "1.7.1",
-    "gulp-minify-css": "^1.2.1",
-    "gulp-plumber": "^1.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.1.0",
-    "gulp-uglify": "^1.5.1",
-    "isparta": "^4.0.0",
-    "jsdom": "^7.0.2",
-    "tape": "^4.2.2",
-    "xo": "^0.11.1"
+    "babel-cli": "^6.10.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.13.0",
+    "browserify": "^13.0.1",
+    "clean-css": "^3.4.18",
+    "node-sass": "^3.8.0",
+    "tape": "^4.6.0",
+    "uglify-js": "^2.6.4",
+    "watchify": "^3.7.0"
   },
-  "main": "./lib/prelodr.js",
+  "main": "./dist/prelodr.min.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0"
   },
   "scripts": {
-    "test": "babel-node `npm bin`/isparta cover --report lcov --report html --report text ./test/prelodr.spec.js",
-    "coveralls": "coveralls < ./coverage/lcov.info"
-  },
-  "bugs": {
-    "url": "https://github.com/quintana-dev/prelodr/issues"
+    "postinstall": "mkdir -p .tmp",
+    "build:js": "babel src/prelodr.js | uglifyjs --stats -vmc > dist/prelodr.min.js",
+    "xbuild:js": "browserify -t [ babelify ] examples/main.js | uglifyjs --stats -vmc > .tmp/bundle.js",
+    "build:css": "node-sass src/prelodr.scss dist/prelodr.min.css && cleancss dist/prelodr.min.css -do dist/prelodr.min.css",
+    "watch:js": "watchify -t [ babelify ] examples/main.js -o .tmp/bundle.js -dv",
+    "watch:css": "node-sass src/prelodr.scss dist/prelodr.min.css -w",
+    "build": "npm run build:js & npm run build:css",
+    "watch": "npm run watch:css & npm run watch:js",
+    "dev": "npm run build:css && npm run build:js && npm run xbuild:js && (npm run server & npm run watch)",
+    "server": "browser-sync start --server '.tmp' --server 'examples' --server 'dist' --port 7001 --files 'examples/{,*/}*.html' --files 'dist/prelodr.min.css' --files '.tmp/bundle.js'",
+    "start": "npm run dev"
   },
   "babel": {
     "presets": [
       "es2015"
-    ]
-  },
-  "xo": {
-    "space": true,
-    "esnext": true,
-    "envs": [
-      "browser",
-      "jquery",
-      "amd"
+    ],
+    "plugins": [
+      "add-module-exports",
+      "transform-object-assign"
     ]
   }
 }

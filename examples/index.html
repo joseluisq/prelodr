@@ -85,39 +85,7 @@
       <button id="btn-preloadr">Start</button>
     </p>
 
-    <script src="prelodr.js"></script>
-
-    <script>
-      (function() {
-
-        var prelodr = new Prelodr({
-          prefixClass: "prelodr",
-          show: function() {
-            console.log("Show callback");
-          },
-          hide: function() {
-            console.log("Hide callback");
-          }
-        });
-
-        var $btnPreloadr = document.getElementById("btn-preloadr");
-
-        $btnPreloadr.addEventListener("click", function() {
-
-          // Show prelodr (Chaining support)
-          prelodr.in("Starting...")
-          .out()
-                  .in("Processing...").out(function (done) {
-                    setTimeout(function () {
-                      done();
-                    }, 1200);
-                  })
-                  .in("Finishing...").out();
-
-        }, false);
-
-      })(this);
-    </script>
+    <script src="bundle.js"></script>
 
   </body>
 </html>

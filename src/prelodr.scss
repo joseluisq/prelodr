@@ -3,11 +3,12 @@
 
 $prelodr: '.prelodr';
 $prelodr-timing: 2.5s;
+$prelodr-color-white: #fff;
 $prelodr-color-green: #0f9d58;
 $prelodr-color-red: #da4733;
 $prelodr-color-blue: #1d6fee;
 $prelodr-color-yellow: #fdba2c;
-$prelodr-overlay-color: rgba(225, 225, 225, 0.75);
+$prelodr-overlay-color: rgba($prelodr-color-white, .75);
 $prelodr-zindex: 100;
 
 #{$prelodr} {
@@ -20,10 +21,10 @@ $prelodr-zindex: 100;
   background-color: $prelodr-overlay-color;
   font-family: Arial, sans-serif;
   font-size: 16px;
-  overflow: hidden;
   cursor: default;
-  opacity: 0;
-  visibility: hidden;
+  // overflow: hidden;
+  // opacity: 0;
+  // visibility: hidden;
   transition: all 0.3s cubic-bezier(.4,0,.2,1);
   z-index: $prelodr-zindex;
 
@@ -49,9 +50,9 @@ $prelodr-zindex: 100;
     vertical-align: middle;
     font-weight: normal;
     min-width: 150px;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
+    // overflow: hidden;
+    // opacity: 0;
+    // visibility: hidden;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 5px 0px rgba(0,0,0,0.23);
     transition: all 0.3s cubic-bezier(.4,0,.2,1);
     transform: scale(0.95);
@@ -95,7 +96,7 @@ $prelodr-zindex: 100;
     z-index: 2;
     width: 0;
     background-color: $prelodr-color-green;
-    height: 3px;
+    height: 4px;
     content: '';
     animation: prelodr-front linear #{$prelodr-timing} infinite;
   }

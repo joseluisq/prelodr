@@ -25,10 +25,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
+    "banr-stream": "^1.0.2",
     "browser-sync": "^2.13.0",
     "browserify": "^13.0.1",
     "clean-css": "^3.4.18",
@@ -43,7 +44,7 @@
   },
   "scripts": {
     "postinstall": "mkdir -p .tmp",
-    "build:js": "babel src/prelodr.js | uglifyjs --stats -vmc > dist/prelodr.min.js",
+    "build:js": "babel src/prelodr.js| uglifyjs --stats -vmc | banr-stream > dist/prelodr.min.js",
     "xbuild:js": "browserify -t [ babelify ] examples/main.js | uglifyjs --stats -vmc > .tmp/bundle.js",
     "build:css": "node-sass src/prelodr.scss dist/prelodr.min.css && cleancss dist/prelodr.min.css -do dist/prelodr.min.css",
     "watch:js": "watchify -t [ babelify ] examples/main.js -o .tmp/bundle.js -dv",
@@ -59,7 +60,7 @@
       "es2015"
     ],
     "plugins": [
-      "add-module-exports",
+      "transform-es2015-modules-umd",
       "transform-object-assign"
     ]
   }

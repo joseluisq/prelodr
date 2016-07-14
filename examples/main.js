@@ -9,3 +9,7 @@ pre.on('shown', () => {
 pre.on('hidden', () => {
   console.log('hidden!')
 })
+
+const btn = document.getElementById('btn-preloadr')
+
+btn.addEventListener('click', () => pre.show().hide(), false)

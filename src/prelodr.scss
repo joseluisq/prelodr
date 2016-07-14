@@ -10,22 +10,22 @@ $prelodr-color-blue: #1d6fee;
 $prelodr-color-yellow: #fdba2c;
 $prelodr-overlay-color: rgba($prelodr-color-white, .75);
 $prelodr-zindex: 100;
+$prelodr-ease: .3s cubic-bezier(.4, 0, .2, 1);
 
 #{$prelodr} {
   position: fixed;
-  display: table;
   height: 100%;
   width: 100%;
+  display: table;
   left: 0;
   top: 0;
   background-color: $prelodr-overlay-color;
   font-family: Arial, sans-serif;
   font-size: 16px;
   cursor: default;
-  // overflow: hidden;
-  // opacity: 0;
-  // visibility: hidden;
-  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  visibility: 0;
+  transition: opacity .3s $prelodr-ease;
   z-index: $prelodr-zindex;
 
   // Box wrapper
@@ -50,25 +50,22 @@ $prelodr-zindex: 100;
     vertical-align: middle;
     font-weight: normal;
     min-width: 150px;
-    // overflow: hidden;
-    // opacity: 0;
-    // visibility: hidden;
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.16), 0px 2px 5px 0px rgba(0,0,0,0.23);
-    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 5px 0 rgba(0,0,0,0.23);
+    transition:
+      opacity $prelodr-ease,
+      transform $prelodr-ease;
     transform: scale(0.95);
     transition-delay: .2s;
     border-radius: 3px;
   }
 
-  // In effect
+  &#{$prelodr}-hide {
+    display: none;
+  }
+
   &#{$prelodr}-in {
     opacity: 1;
     visibility: visible;
-  }
-
-  // Out effect
-  &#{$prelodr}-out {
-    opacity: 0;
   }
 
   & > span > span#{$prelodr}-in {
@@ -134,42 +131,42 @@ $prelodr-zindex: 100;
 
 @keyframes prelodr-front {
   0% {
-    width: 0;
     background-color: $prelodr-color-red;
+    width: 0;
   }
 
   24.9% {
-    width: 50%;
     background-color: $prelodr-color-red;
+    width: 50%;
   }
 
   25% {
-    width: 0;
     background-color: $prelodr-color-blue;
+    width: 0;
   }
 
   49.9% {
-    width: 50%;
     background-color: $prelodr-color-blue;
+    width: 50%;
   }
 
   50% {
-    width: 0;
     background-color: $prelodr-color-yellow;
+    width: 0;
   }
 
   74.9% {
-    width: 50%;
     background-color: $prelodr-color-yellow;
+    width: 50%;
   }
 
   75% {
-    width: 0;
     background-color: $prelodr-color-green;
+    width: 0;
   }
 
   100% {
-    width: 50%;
     background-color: $prelodr-color-green;
+    width: 50%;
   }
 }

@@ -1,4 +1,4 @@
-src
+index.js
 *#
 node_modules
 ssl
@@ -11,6 +11,8 @@ ssl
 .idea
 nbproject
 .git
+.gitattributes
+.travis.yml
 .gitignore
 .tmp
 .jshintrc

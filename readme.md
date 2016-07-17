@@ -5,6 +5,8 @@
 
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)
 
+**Notice:** Prelodr v2 is actually in development. If you looking for previous version check out [v1 branch](https://github.com/joseluisq/prelodr/tree/v1).
+
 ## Install
 
 ```sh
@@ -14,13 +16,13 @@ $ npm install prelodr --save-dev
 ## Usage
 
 ```js
-const pre = require('../src/prelodr')()
+const pre = require('prelodr')()
 
 // a) Show prelodr
-prelodr.show('Loading...')
+pre.show('Loading...')
 
 // b) Hide prelodr
-prelodr.hide()
+pre.hide()
 ```
 
 ### Setup

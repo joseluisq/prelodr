@@ -1,6 +1,4 @@
-import Prelodr from '../src/prelodr'
-
-const pre = Prelodr()
+const pre = require('../src/prelodr')()
 
 pre.on('shown', () => {
   console.log('shown!')

@@ -3,6 +3,8 @@
 
 > A simple Material preloader inspired in Google Inbox.
 
+**Notice:** Unfortunately this version is no longer maintained. Please it recommended to use **v2.x**.
+
 [![Prelodr preview](https://cloud.githubusercontent.com/assets/1700322/11434023/c12a2918-9493-11e5-943b-eef39f3420e5.gif)](http://cdpn.io/rVeyXY)
 
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)

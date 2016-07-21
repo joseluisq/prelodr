@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/quintana-dev/prelodr.git"
+    "url": "https://github.com/joseluisq/prelodr.git"
   },
   "author": {
     "name": "José Luis Quintana",
@@ -50,7 +50,7 @@
     "coveralls": "coveralls < ./coverage/lcov.info"
   },
   "bugs": {
-    "url": "https://github.com/quintana-dev/prelodr/issues"
+    "url": "https://github.com/joseluisq/prelodr/issues"
   },
   "babel": {
     "presets": [

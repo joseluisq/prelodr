@@ -1,9 +1,9 @@
-/*! Prelodr v1.0.6 | MIT (c) 2015 José Luis Quintana */
+/*! Prelodr v1.0.8 | MIT (c) 2016 José Luis Quintana */
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -18,8 +18,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * Prelodr class
  */
-
-var Prelodr = (function () {
+var Prelodr = function () {
 
   /**
    * Constructor class
@@ -28,7 +27,6 @@ var Prelodr = (function () {
    * @param {Object} options - Default options object
    * @constructor
    */
-
   function Prelodr(container, options) {
     _classCallCheck(this, Prelodr);
 
@@ -88,6 +86,7 @@ var Prelodr = (function () {
    * @param {Object} options - Options object
    */
 
+
   _createClass(Prelodr, [{
     key: 'setOptions',
     value: function setOptions(options) {
@@ -105,7 +104,7 @@ var Prelodr = (function () {
   }, {
     key: '_merge',
     value: function _merge(a, b) {
-      var i = undefined;
+      var i = void 0;
 
       if (b) {
         for (i in b) {
@@ -215,23 +214,25 @@ var Prelodr = (function () {
   }, {
     key: '_queueWalk',
     value: function _queueWalk() {
-      var _this2 = this;
+      var that = this;
 
-      var one = this.queu.first();
+      if (that) {
+        var one = that.queu.first();
 
-      if (one && one.is === 'in') {
-        this.isShown = true;
+        if (one && one.is === 'in') {
+          that.isShown = true;
 
-        one.fn(function () {
-          var next = _this2.queu.first();
-          _this2.isStart = false;
+          one.fn(function () {
+            var next = that.queu.first();
+            that.isStart = false;
 
-          if (next && next.is === 'out') {
-            next.fn(function () {
-              _this2._queueWalk();
-            });
-          }
-        });
+            if (next && next.is === 'out') {
+              next.fn(function () {
+                that._queueWalk();
+              });
+            }
+          });
+        }
       }
     }
 
@@ -244,13 +245,13 @@ var Prelodr = (function () {
   }, {
     key: 'in',
     value: function _in(text) {
-      var _this3 = this;
+      var _this2 = this;
 
       var obj = {
         id: this._getId(),
         is: 'in',
         fn: function fn(cb) {
-          return _this3._show(text, cb);
+          return _this2._show(text, cb);
         }
       };
 
@@ -272,7 +273,7 @@ var Prelodr = (function () {
   }, {
     key: 'out',
     value: function out(_fn) {
-      var _this4 = this;
+      var _this3 = this;
 
       this.queu.add({
         id: this._getId(),
@@ -280,10 +281,10 @@ var Prelodr = (function () {
         fn: function fn(cb) {
           if (_fn && typeof _fn === 'function') {
             _fn(function () {
-              _this4._hide(cb);
+              _this3._hide(cb);
             });
           } else {
-            _this4._hide(cb);
+            _this3._hide(cb);
           }
         }
       });
@@ -307,7 +308,7 @@ var Prelodr = (function () {
   }, {
     key: '_prepOut',
     value: function _prepOut(cb) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.isAnimating = true;
       this.queu.shift();
@@ -316,24 +317,24 @@ var Prelodr = (function () {
       this.wrapper.children[0].className = '';
 
       setTimeout(function () {
-        if (_this5.options.hide) {
-          _this5.options.hide(_this5, []);
+        if (_this4.options.hide) {
+          _this4.options.hide(_this4, []);
         }
 
         if (el) {
-          _this5.element.removeChild(_this5.wrapper);
+          _this4.element.removeChild(_this4.wrapper);
         } else {
-          var cls = _this5.options.prefixClass + ' ' + _this5.options.prefixClass + '-out';
-          _this5.element.className = cls;
+          var cls = _this4.options.prefixClass + ' ' + _this4.options.prefixClass + '-out';
+          _this4.element.className = cls;
 
           setTimeout(function () {
-            _this5.container.removeChild(_this5.element);
-            _this5.element = null;
-          }, _this5.options.duration / 1.5);
+            _this4.container.removeChild(_this4.element);
+            _this4.element = null;
+          }, _this4.options.duration / 1.5);
         }
 
-        _this5.isAnimating = false;
-        _this5.isShown = false;
+        _this4.isAnimating = false;
+        _this4.isShown = false;
 
         if (cb) {
           cb();
@@ -355,7 +356,7 @@ var Prelodr = (function () {
   }]);
 
   return Prelodr;
-})();
+}();
 
 (function () {
   /* istanbul ignore else */
@@ -363,34 +364,34 @@ var Prelodr = (function () {
     module.exports = Prelodr;
     /* istanbul ignore else */
   } else if (typeof define === 'function' && define.amd) {
-      define([], function () {
-        return Prelodr;
-      });
-    } else {
-      window.Prelodr = Prelodr;
+    define([], function () {
+      return Prelodr;
+    });
+  } else {
+    window.Prelodr = Prelodr;
 
-      if (window.jQuery) {
-        window.jQuery.fn.prelodr = function (options) {
-          var fn = undefined;
-          var prelodr = undefined;
+    if (window.jQuery) {
+      window.jQuery.fn.prelodr = function (options) {
+        var fn = void 0;
+        var prelodr = void 0;
 
-          if (typeof options === 'string') {
-            prelodr = this.data('prelodr');
-            fn = prelodr[options];
+        if (typeof options === 'string') {
+          prelodr = this.data('prelodr');
+          fn = prelodr[options];
 
-            if (prelodr !== 'undefined' && typeof options === 'string' && fn) {
-              return fn.apply(prelodr, Array.prototype.slice.call(arguments, 1));
-            }
-
-            var str = 'Method ' + options + ' is not supported by jQuery.prelodr.';
-            window.jQuery.error(str);
-          } else {
-            prelodr = new window.Prelodr(this[0], options);
-            this.data('prelodr', prelodr);
+          if (prelodr !== 'undefined' && typeof options === 'string' && fn) {
+            return fn.apply(prelodr, Array.prototype.slice.call(arguments, 1));
           }
 
-          return this;
-        };
-      }
+          var str = 'Method ' + options + ' is not supported by jQuery.prelodr.';
+          window.jQuery.error(str);
+        } else {
+          prelodr = new window.Prelodr(this[0], options);
+          this.data('prelodr', prelodr);
+        }
+
+        return this;
+      };
     }
+  }
 })();

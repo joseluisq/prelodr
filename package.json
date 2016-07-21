@@ -1,7 +1,7 @@
 {
   "title": "Prelodr",
   "name": "prelodr",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A simple Material preloader inspired in Google Inbox",
   "keywords": [
     "preloader",
@@ -45,6 +45,8 @@
   },
   "scripts": {
     "test": "babel-node `npm bin`/isparta cover --report lcov --report html --report text ./test/prelodr.spec.js",
+    "start": "gulp default",
+    "serve": "gulp watch",
     "coveralls": "coveralls < ./coverage/lcov.info"
   },
   "bugs": {

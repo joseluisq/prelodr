@@ -51,7 +51,7 @@ module.exports = (options = {}) => {
     return emitr
   }
 
-  function hide () {
+  function hide (fn) {
     queue
       .then(done => {
         spanText.classList.remove(clsIn)
@@ -59,8 +59,11 @@ module.exports = (options = {}) => {
 
         setTimeout(() => {
           element.classList.add(clsHide)
+
+          if (fn) fn(done)
+          else done()
+
           emitr.emit('hidden')
-          done()
         }, opts.duration)
       })
 

@@ -1,4 +1,4 @@
-/*! Prelodr v1.0.8 | MIT (c) 2016 José Luis Quintana */
+/*! Prelodr v1.0.9 | MIT (c) 2016 José Luis Quintana */
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -8,10 +8,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Prelodr v1.0.5
+ * Prelodr v1.0.9
  * http://git.io/prelodr
  *
- * @author    José Luis Quintana | quintana.io
+ * @author    José Luis Quintana | http://git.io/joseluisq
  * @license   MIT
  */
 
@@ -149,45 +149,43 @@ var Prelodr = function () {
 
   }, {
     key: '_show',
-    value: function _show(text, cb) {
-      var _this = this;
-
-      this.wrapper = window.document.createElement('span');
+    value: function _show(text, cb, ref) {
+      ref.wrapper = window.document.createElement('span');
 
       var spanText = window.document.createElement('span');
       var progressbar = window.document.createElement('span');
 
       spanText.appendChild(window.document.createTextNode(text));
-      this.wrapper.appendChild(spanText);
+      ref.wrapper.appendChild(spanText);
       spanText.appendChild(progressbar);
-      progressbar.className = this.options.prefixClass + '-progressbar';
+      progressbar.className = ref.options.prefixClass + '-progressbar';
 
-      if (!this.element) {
-        this.element = window.document.createElement('span');
-        this.element.className = this.options.prefixClass;
-        this.container.appendChild(this.element);
+      if (!ref.element) {
+        ref.element = window.document.createElement('span');
+        ref.element.className = ref.options.prefixClass;
+        ref.container.appendChild(ref.element);
       }
 
-      this.element.appendChild(this.wrapper);
+      ref.element.appendChild(ref.wrapper);
 
       setTimeout(function () {
-        var cls = _this.options.prefixClass + ' ' + _this.options.prefixClass + '-in';
-        _this.wrapper.children[0].className = _this.options.prefixClass + '-in';
-        _this.element.className = cls;
+        var cls = ref.options.prefixClass + ' ' + ref.options.prefixClass + '-in';
+        ref.wrapper.children[0].className = ref.options.prefixClass + '-in';
+        ref.element.className = cls;
 
         setTimeout(function () {
-          _this.isShown = true;
-          _this.isAnimating = false;
-          _this.queu.shift();
+          ref.isShown = true;
+          ref.isAnimating = false;
+          ref.queu.shift();
 
-          if (_this.options.show) {
-            _this.options.show(_this, _this.element);
+          if (ref.options.show) {
+            ref.options.show(ref, ref.element);
           }
 
           if (cb) {
             cb();
           }
-        }, _this.options.duration);
+        }, ref.options.duration);
       }, 10);
     }
 
@@ -199,10 +197,12 @@ var Prelodr = function () {
 
   }, {
     key: '_hide',
-    value: function _hide(cb) {
-      if (this.isShown) {
-        this.isShown = false;
-        this._prepOut(cb);
+    value: function _hide(cb, ref) {
+      var that = ref || this;
+
+      if (that.isShown) {
+        that.isShown = false;
+        that._prepOut(cb, that);
       }
     }
 
@@ -213,26 +213,23 @@ var Prelodr = function () {
 
   }, {
     key: '_queueWalk',
-    value: function _queueWalk() {
-      var that = this;
+    value: function _queueWalk(ref) {
+      var that = ref || this;
+      var one = that.queu.first();
 
-      if (that) {
-        var one = that.queu.first();
+      if (one && one.is === 'in') {
+        that.isShown = true;
 
-        if (one && one.is === 'in') {
-          that.isShown = true;
+        one.fn(function () {
+          var next = that.queu.first();
+          that.isStart = false;
 
-          one.fn(function () {
-            var next = that.queu.first();
-            that.isStart = false;
-
-            if (next && next.is === 'out') {
-              next.fn(function () {
-                that._queueWalk();
-              });
-            }
-          });
-        }
+          if (next && next.is === 'out') {
+            next.fn(function () {
+              that._queueWalk(that);
+            });
+          }
+        });
       }
     }
 
@@ -245,13 +242,13 @@ var Prelodr = function () {
   }, {
     key: 'in',
     value: function _in(text) {
-      var _this2 = this;
+      var _this = this;
 
       var obj = {
         id: this._getId(),
         is: 'in',
         fn: function fn(cb) {
-          return _this2._show(text, cb);
+          return _this._show(text, cb, _this);
         }
       };
 
@@ -259,7 +256,7 @@ var Prelodr = function () {
 
       if (!this.isStart) {
         this.isStart = true;
-        this._queueWalk();
+        this._queueWalk(this);
       }
 
       return this;
@@ -273,31 +270,31 @@ var Prelodr = function () {
   }, {
     key: 'out',
     value: function out(_fn) {
-      var _this3 = this;
+      var that = this;
 
-      this.queu.add({
-        id: this._getId(),
+      that.queu.add({
+        id: that._getId(),
         is: 'out',
-        fn: function fn(cb) {
+        fn: function fn(cb, ref) {
           if (_fn && typeof _fn === 'function') {
             _fn(function () {
-              _this3._hide(cb);
+              that._hide(cb, ref);
             });
           } else {
-            _this3._hide(cb);
+            that._hide(cb, ref);
           }
         }
       });
 
-      if (!this.isStart) {
-        var one = this.queu.first();
+      if (!that.isStart) {
+        var one = that.queu.first();
 
         if (one && one.is === 'out') {
-          one.fn(this._queueWalk);
+          one.fn(that._queueWalk, this);
         }
       }
 
-      return this;
+      return that;
     }
 
     /**
@@ -307,39 +304,39 @@ var Prelodr = function () {
 
   }, {
     key: '_prepOut',
-    value: function _prepOut(cb) {
-      var _this4 = this;
+    value: function _prepOut(cb, that) {
+      that.isAnimating = true;
+      that.queu.shift();
 
-      this.isAnimating = true;
-      this.queu.shift();
-
-      var el = this.queu.first();
-      this.wrapper.children[0].className = '';
+      var el = that.queu.first();
+      that.wrapper.children[0].className = '';
 
       setTimeout(function () {
-        if (_this4.options.hide) {
-          _this4.options.hide(_this4, []);
+        if (that.options.hide) {
+          that.options.hide(that, []);
         }
+
+        if (!that.element) return;
 
         if (el) {
-          _this4.element.removeChild(_this4.wrapper);
+          that.element.removeChild(that.wrapper);
         } else {
-          var cls = _this4.options.prefixClass + ' ' + _this4.options.prefixClass + '-out';
-          _this4.element.className = cls;
+          var cls = that.options.prefixClass + ' ' + that.options.prefixClass + '-out';
+          that.element.className = cls;
 
           setTimeout(function () {
-            _this4.container.removeChild(_this4.element);
-            _this4.element = null;
-          }, _this4.options.duration / 1.5);
+            that.container.removeChild(that.element);
+            that.element = null;
+          }, that.options.duration / 1.5);
         }
 
-        _this4.isAnimating = false;
-        _this4.isShown = false;
+        that.isAnimating = false;
+        that.isShown = false;
 
         if (cb) {
-          cb();
+          cb(that);
         }
-      }, this.options.duration);
+      }, that.options.duration);
     }
 
     /**

@@ -1,9 +1,9 @@
 # Prelodr
-[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/quintana-dev/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](http://img.shields.io/travis/quintana-dev/prelodr.svg?style=flat-square)](https://travis-ci.org/quintana-dev/prelodr) [![Coverage Status](https://img.shields.io/coveralls/quintana-dev/prelodr.svg?style=flat-square)](https://coveralls.io/github/quintana-dev/prelodr?branch=master) [![devDependency Status](https://david-dm.org/quintana-dev/prelodr/dev-status.svg?style=flat-square)](https://david-dm.org/quintana-dev/prelodr#info=devDependencies)
+[![](https://img.shields.io/bower/v/prelodr.svg?style=flat-square)](https://github.com/joseluisq/prelodr#install) [![](https://img.shields.io/npm/v/prelodr.svg?style=flat-square)](https://www.npmjs.com/package/prelodr) [![Build Status](https://api.travis-ci.org/joseluisq/prelodr.svg?branch=v1)](https://travis-ci.org/joseluisq/prelodr) [![devDependency Status](https://david-dm.org/joseluisq/prelodr/dev-status.svg?style=flat-square)](https://david-dm.org/joseluisq/prelodr#info=devDependencies)
 
 > A simple Material preloader inspired in Google Inbox.
 
-**Notice:** Unfortunately this version is no longer maintained. Please it recommended to use **v2.x**.
+**Notice:** Unfortunately this version is **no longer maintained**. Instead, it recommended to use [v2.x](https://github.com/joseluisq/prelodr/).
 
 [![Prelodr preview](https://cloud.githubusercontent.com/assets/1700322/11434023/c12a2918-9493-11e5-943b-eef39f3420e5.gif)](http://cdpn.io/rVeyXY)
 
@@ -14,20 +14,6 @@
 
 ```sh
 $ bower install prelodr --save
-```
-
-#### Npm
-
-```sh
-$ npm install prelodr --save-dev
-```
-
-#### CDN
-Hosted by [jsDelivr](https://www.jsdelivr.com/)
-
-```html
-<!-- Latest compiled and minified prelodr.js -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/prelodr/latest/prelodr.min.js">
 ```
 
 ## Usage
@@ -146,10 +132,10 @@ Hide the prelodr.
 - Checks if Prelodr is visible (boolean).
 
 ## Changelog
-Check out the [changelog](https://github.com/quintana-dev/prelodr/releases)
+Check out the [changelog](https://github.com/joseluisq/prelodr/releases)
 
 ## Contributions
-If you would like to contribute [pull requests](https://github.com/quintana-dev/prelodr/pulls) and [issues](https://github.com/quintana-dev/prelodr/issues) will be welcome! Feature requests are welcome. Please before sending some feature requests make sure provide as much detail and context as possible.
+If you would like to contribute [pull requests](https://github.com/joseluisq/prelodr/pulls) and [issues](https://github.com/joseluisq/prelodr/issues) will be welcome! Feature requests are welcome. Please before sending some feature requests make sure provide as much detail and context as possible.
 
 ## License
 MIT license

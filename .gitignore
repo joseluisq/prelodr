@@ -1,7 +1,6 @@
 index.es5.js
 node_modules
 bower_components
-dist
 lib
 log
 .tmp

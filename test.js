@@ -1,6 +1,6 @@
 const test = require('tape')
 const jsdom = require('jsdom').jsdom
-const Prelodr = require('../src/prelodr')
+const Prelodr = require('./prelodr')
 
 global.document = jsdom('<!doctype html><html><body></body></html>')
 global.window = document.defaultView

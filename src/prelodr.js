@@ -1,5 +1,5 @@
-const Emitus = require('emitus')
 const Seqr = require('seqr')
+const Emitus = require('emitus')
 
 module.exports = (options = {}) => {
   const opts = Object.assign({
@@ -8,8 +8,8 @@ module.exports = (options = {}) => {
     prefixClass: 'prelodr'
   }, options)
 
+  const seqr = Seqr()
   const emitr = Emitus({show, hide, text})
-  const queue = Seqr()
 
   const element = el()
   const wrapper = el()
@@ -31,41 +31,39 @@ module.exports = (options = {}) => {
   return emitr
 
   function show (str) {
-    queue
-      .then(done => {
-        text(str)
+    seqr.then(done => {
+      text(str)
 
-        element.classList.remove(clsHide)
+      element.classList.remove(clsHide)
 
-        setTimeout(() => {
-          spanText.classList.add(clsIn)
-          element.classList.add(clsIn)
-        }, 10)
+      setTimeout(() => {
+        spanText.classList.add(clsIn)
+        element.classList.add(clsIn)
+      }, 10)
 
-        setTimeout(() => {
-          emitr.emit('shown')
-          done()
-        }, opts.duration)
-      })
+      setTimeout(() => {
+        emitr.emit('shown')
+        done()
+      }, opts.duration)
+    })
 
     return emitr
   }
 
   function hide (fn) {
-    queue
-      .then(done => {
-        spanText.classList.remove(clsIn)
-        element.classList.remove(clsIn)
+    seqr.then(done => {
+      spanText.classList.remove(clsIn)
+      element.classList.remove(clsIn)
 
-        setTimeout(() => {
-          element.classList.add(clsHide)
+      setTimeout(() => {
+        element.classList.add(clsHide)
 
-          if (fn) fn(done)
-          else done()
+        if (fn) fn(done)
+        else done()
 
-          emitr.emit('hidden')
-        }, opts.duration)
-      })
+        emitr.emit('hidden')
+      }, opts.duration)
+    })
 
     return emitr
   }

@@ -21,8 +21,7 @@
     "minimal",
     "responsive",
     "material-design",
-    "ui",
-    "jquery-plugin"
+    "ui"
   ],
   "dependencies": {
     "emitus": ">=1.0.5",

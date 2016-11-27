@@ -8,8 +8,8 @@ global.window = document.defaultView
 test('Test suite', t => {
   t.plan(7)
 
+  var i = 1
   const pre = Prelodr()
-  let i = 1
 
   pre.on('shown', () => t.ok(1, `when prelodr is shown [${i}]`))
   pre.on('hidden', () => {

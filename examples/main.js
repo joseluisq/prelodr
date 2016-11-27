@@ -1,4 +1,4 @@
-const pre = require('../src/prelodr')()
+const pre = require('../dist/prelodr')()
 
 pre.on('shown', () => {
   console.log('shown!')

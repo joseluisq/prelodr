@@ -1,4 +1,4 @@
-const pre = require('../dist/prelodr')()
+const pre = require('../prelodr')()
 
 pre.on('shown', () => {
   console.log('shown!')
@@ -12,7 +12,7 @@ const btn = document.getElementById('btn-preloadr')
 
 btn.addEventListener('click', () =>
   pre
-    .show('Initializing...').hide()
+    .show('<b>Initializing...</b>').hide()
     .show('Processing...').hide()
     .show('Finishing...').hide()
 , false)

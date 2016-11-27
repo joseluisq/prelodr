@@ -15,7 +15,7 @@ module.exports = (options = {}) => {
   const wrapper = el()
   const progressbar = el()
   const spanText = el()
-  const textNode = document.createTextNode('')
+  const textNode = el()
   const clsIn = `${opts.prefixClass}-in`
   const clsHide = `${opts.prefixClass}-hide`
 
@@ -69,7 +69,7 @@ module.exports = (options = {}) => {
   }
 
   function text (str = 'Loading...') {
-    textNode.textContent = str
+    textNode.innerHTML = str
   }
 
   function el (tag = 'span') {

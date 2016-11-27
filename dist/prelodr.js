@@ -44,7 +44,7 @@
     var wrapper = el();
     var progressbar = el();
     var spanText = el();
-    var textNode = document.createTextNode('');
+    var textNode = el();
     var clsIn = opts.prefixClass + '-in';
     var clsHide = opts.prefixClass + '-hide';
 
@@ -99,7 +99,7 @@
     function text() {
       var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Loading...';
 
-      textNode.textContent = str;
+      textNode.innerHTML = str;
     }
 
     function el() {

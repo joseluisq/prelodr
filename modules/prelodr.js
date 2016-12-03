@@ -1,5 +1,7 @@
-const Seqr = require('seqr')
-const Emitus = require('emitus')
+/* global module */
+
+import Seqr from 'seqr'
+import Emitus from 'emitus'
 
 module.exports = (options = {}) => {
   const opts = Object.assign({

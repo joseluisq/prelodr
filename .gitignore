@@ -1,6 +1,7 @@
+/prelodr.js
+!modules
 node_modules
 bower_components
-lib
 log
 .tmp
 *#

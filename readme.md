@@ -31,10 +31,11 @@ bower install prelodr --save
 ```
 
 ##### CDN
-The UMD build is also available on [unpkg](https://unpkg.com):
+The UMD and style files are also available on [unpkg](https://unpkg.com):
 
 ```html
-<script src="https://unpkg.com/history/umd/history.min.js"></script>
+<link href="https://unpkg.com/prelodr/dist/prelodr.min.css">
+<script src="https://unpkg.com/prelodr/dist/prelodr.min.js"></script>
 ```
 
 You can use the library via `window.Prelodr`.

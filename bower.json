@@ -23,10 +23,6 @@
     "material-design",
     "ui"
   ],
-  "dependencies": {
-    "emitus": ">=1.0.5",
-    "seqr": ">=1.0.4"
-  },
   "ignore": [
     "**/.*",
     "node_modules",

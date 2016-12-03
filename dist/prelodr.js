@@ -267,79 +267,52 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! emitus v1.0.6 | MIT (c) 2016 José Luis Quintana */
-	(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(module);
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod);
-	    global.Emitus = mod.exports;
+	"use strict";
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	/* global module */
+
+	module.exports = function () {
+	  var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	  var list = [];
+	  var api = _extends({ on: on, off: off, emit: emit }, obj);
+
+	  function on(name, fn) {
+	    list.push({ name: name, fn: fn });
 	  }
-	})(this, function (module) {
-	  "use strict";
 
-	  var _extends = Object.assign || function (target) {
-	    for (var i = 1; i < arguments.length; i++) {
-	      var source = arguments[i];
+	  function off(name) {
+	    var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-	      for (var key in source) {
-	        if (Object.prototype.hasOwnProperty.call(source, key)) {
-	          target[key] = source[key];
-	        }
+	    list.forEach(function (e, i) {
+	      if (e.name === name && e.fn === fn) {
+	        list.splice(i, 1);
 	      }
-	    }
 
-	    return target;
-	  };
+	      if (e.name === name && !fn) {
+	        list.splice(i, 1);
+	      }
+	    });
+	  }
 
-	  module.exports = function () {
-	    var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  function emit(name) {
+	    var _this = this;
 
-	    var list = [];
-	    var api = _extends({ on: on, off: off, emit: emit }, obj);
+	    var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-	    function on(name, fn) {
-	      list.push({ name: name, fn: fn });
-	    }
+	    list.forEach(function (e) {
+	      if (e.name === name) {
+	        e.fn.apply(_this, args);
+	      }
+	    });
+	  }
 
-	    function off(name) {
-	      var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-	      list.forEach(function (e, i) {
-	        if (e.name === name && e.fn === fn) {
-	          list.splice(i, 1);
-	        }
-
-	        if (e.name === name && !fn) {
-	          list.splice(i, 1);
-	        }
-	      });
-	    }
-
-	    function emit(name) {
-	      var _this = this;
-
-	      var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-
-	      list.forEach(function (e) {
-	        if (e.name === name) {
-	          e.fn.apply(_this, args);
-	        }
-	      });
-	    }
-
-	    return api;
-	  };
-	});
-
-
+	  return api;
+	};
 
 /***/ }
 /******/ ])

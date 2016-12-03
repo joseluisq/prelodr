@@ -18,7 +18,7 @@
   },
   "main": "./prelodr.js",
   "dependencies": {
-    "emitus": "^1.0.5",
+    "emitus": "^1.1.2",
     "seqr": "^1.0.4"
   },
   "devDependencies": {
@@ -69,9 +69,7 @@
   },
   "jest": {
     "verbose": true,
-    "testPathDirs": [
-      "modules"
-    ],
+    "testPathDirs": ["modules"],
     "testRegex": "test.(js|jsx|spec)$"
   }
 }

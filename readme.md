@@ -25,9 +25,19 @@ requirejs(['prelodr'], Prelodr => {
 
 #### Browser
 
+##### Bower
 ```sh
 bower install prelodr --save
 ```
+
+##### CDN
+The UMD build is also available on [unpkg](https://unpkg.com):
+
+```html
+<script src="https://unpkg.com/history/umd/history.min.js"></script>
+```
+
+You can use the library via `window.Prelodr`.
 
 ## Usage
 

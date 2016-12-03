@@ -3,6 +3,7 @@ node_modules
 bower_components
 ssl
 nbproject
+bower.json
 .DS_STORE
 .DS_Store
 *~

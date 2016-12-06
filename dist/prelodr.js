@@ -247,7 +247,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 3 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -267,10 +267,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
 	    list.forEach(function (e, i) {
+	      /* istanbul ignore if */
 	      if (e.name === name && e.fn === fn) {
 	        list.splice(i, 1);
 	      }
 
+	      /* istanbul ignore if */
 	      if (e.name === name && !fn) {
 	        list.splice(i, 1);
 	      }
@@ -283,7 +285,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
 	    list.forEach(function (e) {
-	      if (e.name === name) {
+	      /* istanbul ignore next */
+	      if (e && e.name === name && typeof e.fn === 'function') {
 	        e.fn.apply(_this, args);
 	      }
 	    });

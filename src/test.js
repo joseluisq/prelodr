@@ -1,7 +1,7 @@
 /* global global, test, expect */
 
 import { jsdom } from 'jsdom'
-import Prelodr from '../modules/prelodr'
+import Prelodr from '../src/prelodr'
 
 global.document = jsdom('<!doctype html><html><body></body></html>')
 global.window = document.defaultView

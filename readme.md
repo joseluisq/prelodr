@@ -1,4 +1,4 @@
-# Prelodr [![Build Status](https://travis-ci.org/joseluisq/prelodr.svg?branch=master)](https://travis-ci.org/joseluisq/prelodr) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+# Prelodr [![Build Status](https://travis-ci.org/joseluisq/prelodr.svg?branch=master)](https://travis-ci.org/joseluisq/prelodr) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/prelodr/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/prelodr?branch=master) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 > A simple Material preloader inspired in Google Inbox.
 
 **Notice:** [v1](https://github.com/joseluisq/prelodr/tree/v1) is no longer maintainable. Please consider to update to current v2.

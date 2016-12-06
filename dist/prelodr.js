@@ -100,6 +100,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return emitr;
 
 	  function show(str) {
+	    /* istanbul ignore next */
 	    seqr.then(function (done) {
 	      text(str);
 
@@ -120,6 +121,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  function hide(fn) {
+	    /* istanbul ignore next */
 	    seqr.then(function (done) {
 	      spanText.classList.remove(clsIn);
 	      element.classList.remove(clsIn);
@@ -153,117 +155,93 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! seqr v1.0.4 | MIT (c) 2016 José Luis Quintana */
-	(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(module, require('quek'));
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod, global.Quek);
-	    global.Seqr = mod.exports;
-	  }
-	})(this, function (module, Quek) {
-	  'use strict';
+	'use strict';
 
-	  module.exports = function () {
-	    var api = {};
-	    var quek = Quek();
+	var _quek = __webpack_require__(2);
 
-	    api.then = function (fn) {
-	      if (fn && typeof fn === 'function') {
-	        quek.append({
-	          fn: fn,
-	          lock: false
-	        });
-	      }
+	var _quek2 = _interopRequireDefault(_quek);
 
-	      next(quek.first());
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	      return api;
-	    };
+	module.exports = function () {
+	  var quek = (0, _quek2.default)();
+	  var api = {};
+
+	  api.then = function (fn) {
+	    /* istanbul ignore else */
+	    if (fn && typeof fn === 'function') {
+	      quek.append({
+	        fn: fn,
+	        lock: false
+	      });
+	    }
+
+	    next(quek.first());
 
 	    return api;
-
-	    function next(el) {
-	      if (el && !el.lock) {
-	        el.lock = true;
-	        el.fn(done);
-	      }
-	    }
-
-	    function done() {
-	      var el = quek.first();
-
-	      if (el && el.lock) {
-	        quek.shift();
-	        next(quek.first());
-	      }
-	    }
 	  };
-	});
 
+	  return api;
 
+	  function next(el) {
+	    if (el && !el.lock) {
+	      el.lock = true;
+	      el.fn(done);
+	    }
+	  }
+
+	  /* istanbul ignore next */
+	  function done() {
+	    var el = quek.first();
+
+	    if (el && el.lock) {
+	      quek.shift();
+	      next(quek.first());
+	    }
+	  }
+	}; /* global module */
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! quek v1.1.0 | MIT (c) 2016 José Luis Quintana */
-	(function (global, factory) {
-	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports !== "undefined") {
-	    factory(module);
-	  } else {
-	    var mod = {
-	      exports: {}
-	    };
-	    factory(mod);
-	    global.Quek = mod.exports;
-	  }
-	})(this, function (module) {
-	  "use strict";
+	"use strict";
 
-	  module.exports = function () {
-	    var que = [];
+	/* global module */
 
-	    return {
-	      append: function append(e) {
-	        return que.push(e);
-	      },
-	      prepend: function prepend(e) {
-	        return que.unshift(e);
-	      },
+	module.exports = function () {
+	  var que = [];
 
-	      pop: function pop() {
-	        return que.pop();
-	      },
-	      shift: function shift() {
-	        return que.shift();
-	      },
+	  return {
+	    append: function append(e) {
+	      return que.push(e);
+	    },
+	    prepend: function prepend(e) {
+	      return que.unshift(e);
+	    },
 
-	      first: function first() {
-	        return que[0];
-	      },
-	      last: function last() {
-	        return que.slice(-1)[0];
-	      },
+	    pop: function pop() {
+	      return que.pop();
+	    },
+	    shift: function shift() {
+	      return que.shift();
+	    },
 
-	      all: function all() {
-	        return que;
-	      },
-	      length: function length() {
-	        return que.length;
-	      }
-	    };
+	    first: function first() {
+	      return que[0];
+	    },
+	    last: function last() {
+	      return que.slice(-1)[0];
+	    },
+
+	    all: function all() {
+	      return que;
+	    },
+	    length: function length() {
+	      return que.length;
+	    }
 	  };
-	});
-
-
+	};
 
 /***/ },
 /* 3 */

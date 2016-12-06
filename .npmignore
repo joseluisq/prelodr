@@ -26,7 +26,8 @@ test
 .eslintrc
 index.html
 karma.conf.js
-modules
+src
 scripts
+coverage
 tests.webpack.js
 webpack.config.js

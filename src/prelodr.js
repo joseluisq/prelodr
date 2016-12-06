@@ -33,6 +33,7 @@ module.exports = (options = {}) => {
   return emitr
 
   function show (str) {
+    /* istanbul ignore next */
     seqr.then(done => {
       text(str)
 
@@ -53,6 +54,7 @@ module.exports = (options = {}) => {
   }
 
   function hide (fn) {
+    /* istanbul ignore next */
     seqr.then(done => {
       spanText.classList.remove(clsIn)
       element.classList.remove(clsIn)

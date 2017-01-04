@@ -1,7 +1,7 @@
 # Prelodr [![Build Status](https://travis-ci.org/joseluisq/prelodr.svg?branch=master)](https://travis-ci.org/joseluisq/prelodr) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/prelodr/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/prelodr?branch=master) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 > A simple Material preloader inspired in Google Inbox.
 
-**Notice:** [v1](https://github.com/joseluisq/prelodr/tree/v1) is no longer maintainable. Please consider to update to current v2.
+For React style check out [react-prelodr](https://github.com/joseluisq/react-prelodr).
 
 [![Prelodr preview](https://cloud.githubusercontent.com/assets/1700322/11434023/c12a2918-9493-11e5-943b-eef39f3420e5.gif)](http://cdpn.io/rVeyXY)
 
@@ -154,4 +154,4 @@ If you would like to contribute [pull requests](https://github.com/joseluisq/pre
 ## License
 MIT license
 
-© 2016 [José Luis Quintana](http://quintana.io)
+© 2017 [José Luis Quintana](http://quintana.io)

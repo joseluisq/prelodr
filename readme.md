@@ -1,11 +1,11 @@
 # Prelodr [![Build Status](https://travis-ci.org/joseluisq/prelodr.svg?branch=master)](https://travis-ci.org/joseluisq/prelodr) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/prelodr/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/prelodr?branch=master) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 > A simple Material preloader inspired in Google Inbox.
 
-For React style check out [react-prelodr](https://github.com/joseluisq/react-prelodr).
-
 [![Prelodr preview](https://cloud.githubusercontent.com/assets/1700322/11434023/c12a2918-9493-11e5-943b-eef39f3420e5.gif)](http://cdpn.io/rVeyXY)
 
 [View demo](http://codepen.io/joseluisq/full/rVeyXY)
+
+For React style check out [react-prelodr](https://github.com/joseluisq/react-prelodr).
 
 ## Install
 

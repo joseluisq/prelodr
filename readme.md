@@ -59,32 +59,6 @@ pre.show('Loading...')
 pre.hide()
 ```
 
-### Setup
-Constructor supports two params, `container` (it should be a `HTMLElement`, by default is `document.body`)
-and `options` (simple hash object). It's also possible to pass a `options` or `container` only.
-
-```js
-// 1) Passing container param only
-const pre = Prelodr(document.getElementById('mycontainer'))
-pre.show('Passing container...')
-```
-
-```js
-// 2) Passing a container and options
-const pre = Prelodr(document.getElementById('mycontainer'), {
-  prefixClass: 'mypreloader'
-})
-pre.show('Passing container and options...')
-```
-
-```js
-// 3) Passing container or options params only
-const pre = Prelodr({
-  prefixClass: 'mypreloader'
-})
-pre.show('Passing options only...')
-```
-
 ### Async and chaining support
 `show(fn)` method supports an optional (fn) callback function.
 
@@ -118,7 +92,11 @@ pre
 ```
 
 ## Options
+- `container` : Container element to append the preloader.
+- `zIndex` : `zindex` style value.
+- `auto` : If it's `true` preloader shows automaticatly. Default `false`
 - `duration` : Timing for show and hide transition.
+- `text`: Default showing text.
 - `prefixClass` : Prefix class for prelodr. Default is `prelodr` class.
 
 ## Methods
@@ -131,11 +109,17 @@ Show the prelodr.
 Hide the prelodr.
 - `fn` _{Function}_ : (Optional) Callback function
 
-### Prelodr.setOptions(options)
-- `options` _{Object}_ : The custom options.
+### Prelodr.setPrefixClass(prefix)
+- `options` _{String}_ : Set the prefix class.
 
-### Prelodr.setContainer(element)
-- `element` _{HTML Element}_ : The element container. Default is `document.body`.
+### Prelodr.setDuration(miliseconds)
+- `miliseconds` _{Number}_ : Set the transition timing
+
+### Prelodr.setZIndex(zindex)
+- `zindex` _{Number}_ : Set the `zindex` style value.
+
+### Prelodr.getElement()
+Return the _{HTMLElement}_ object.
 
 ## Events
 

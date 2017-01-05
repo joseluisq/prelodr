@@ -15,6 +15,13 @@ test('event handling', () => {
   pre
     .show('Loading...')
     .hide()
+
+  pre.setDuration(1000)
+  pre.setText('Completing...')
+  pre.setPrefixClass('prelodr2')
+  pre.setZIndex(20)
+
+  expect(pre.getElement()).toBeDefined()
 })
 
 test('chaining support', () => {

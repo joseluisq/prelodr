@@ -85,27 +85,7 @@
       <button id="btn-preloadr">Start</button>
     </p>
 
-    <script src="dist/prelodr.js"></script>
-    <script>
-      var pre = Prelodr()
-
-      pre.on('shown', function() {
-        console.log('shown!')
-      })
-
-      pre.on('hidden', function() {
-        console.log('hidden!')
-      })
-
-      const btn = document.getElementById('btn-preloadr')
-
-      btn.addEventListener('click', function() {
-        pre
-          .show('Initializing...').hide()
-          .show('Processing...').hide()
-          .show('<b>Finishing...</b>').hide()
-      }, false)
-    </script>
+    <script type="text/javascript" src="bundle.js"></script>
 
   </body>
 </html>

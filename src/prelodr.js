@@ -1,82 +1,158 @@
 /* global module */
 
 import Seqr from 'seqr'
-import Emitus from 'emitus'
+import Extend from 'emitus'
 
 module.exports = (options = {}) => {
-  const opts = Object.assign({
-    container: document.body,
-    duration: 750,
-    prefixClass: 'prelodr'
-  }, options)
+  let defaults = setDefaults(options)
+
+  const emitter = Extend({
+    show,
+    hide,
+    setText,
+    getElement,
+    setPrefixClass,
+    setDuration,
+    setZIndex
+  })
 
   const seqr = Seqr()
-  const emitr = Emitus({show, hide, text})
+  let cls = getClasses()
 
-  const element = el()
   const wrapper = el()
-  const progressbar = el()
-  const spanText = el()
-  const textNode = el()
-  const clsIn = `${opts.prefixClass}-in`
-  const clsHide = `${opts.prefixClass}-hide`
+  wrapper.className = `${cls.prefix} ${cls.hide}`
+  wrapper.innerHTML = `
+    <span>
+      <span>
+        <span class="${cls.text}">${defaults.text}</span>
+        <span class="${cls.progressbar}"></span>
+      </span>
+    </span>
+  `
 
-  spanText.appendChild(textNode)
-  wrapper.appendChild(spanText)
-  spanText.appendChild(progressbar)
-  element.appendChild(wrapper)
-  element.className = opts.prefixClass
-  progressbar.className = `${opts.prefixClass}-progressbar`
-  element.classList.add(clsHide)
-  opts.container.appendChild(element)
+  const spanText = find(`.${cls.text}`)
+  const spanProgressbar = find(`.${cls.progressbar}`)
 
-  return emitr
+  defaults.container.appendChild(wrapper)
+
+  if (defaults.auto) {
+    show(defaults.text)
+  }
+
+  setZIndex(defaults.zIndex)
+
+  return emitter
 
   function show (str) {
     /* istanbul ignore next */
     seqr.then(done => {
-      text(str)
+      setText(str)
 
-      element.classList.remove(clsHide)
+      wrapper.classList.remove(cls.hide)
 
       setTimeout(() => {
-        spanText.classList.add(clsIn)
-        element.classList.add(clsIn)
+        spanText.classList.add(cls.in)
+        wrapper.classList.add(cls.in)
       }, 10)
 
       setTimeout(() => {
-        emitr.emit('shown')
+        emitter.emit('shown')
         done()
-      }, opts.duration)
+      }, defaults.duration)
     })
 
-    return emitr
+    return emitter
   }
 
   function hide (fn) {
     /* istanbul ignore next */
     seqr.then(done => {
-      spanText.classList.remove(clsIn)
-      element.classList.remove(clsIn)
+      spanText.classList.remove(cls.in)
+      wrapper.classList.remove(cls.in)
 
       setTimeout(() => {
-        element.classList.add(clsHide)
+        wrapper.classList.add(cls.hide)
 
         if (fn) fn(done)
         else done()
 
-        emitr.emit('hidden')
-      }, opts.duration)
+        emitter.emit('hidden')
+      }, defaults.duration)
     })
 
-    return emitr
+    return emitter
   }
 
-  function text (str = 'Loading...') {
-    textNode.innerHTML = str
+  function setText (str) {
+    /* istanbul ignore next */
+    if (!str && defaults.text) {
+      str = defaults.text
+    }
+
+    defaults.text = str
+    spanText.innerHTML = str
+
+    return emitter
+  }
+
+  function getElement () {
+    return wrapper
+  }
+
+  function setDuration (duration) {
+    defaults.duration = duration
+  }
+
+  function setZIndex (zindex) {
+    defaults.zIndex = zindex
+    wrapper.style.zIndex = zindex
+  }
+
+  function setPrefixClass (prefix) {
+    defaults.prefixClass = prefix
+    updateClasses()
+  }
+
+  function setDefaults (options = {}) {
+    return Object.assign({
+      container: document.body,
+      duration: 750,
+      zIndex: 100,
+      auto: false,
+      text: 'Loading...',
+      prefixClass: 'prelodr'
+    }, options)
+  }
+
+  function updateClasses () {
+    const from = cls
+
+    cls = getClasses()
+    replaceClass(wrapper, from.prefix, cls.prefix)
+    replaceClass(spanText, from.text, cls.text)
+    replaceClass(spanProgressbar, from.progressbar, cls.progressbar)
+  }
+
+  function getClasses () {
+    return {
+      prefix: defaults.prefixClass,
+      in: `${defaults.prefixClass}-in`,
+      hide: `${defaults.prefixClass}-hide`,
+      text: `${defaults.prefixClass}-text`,
+      progressbar: `${defaults.prefixClass}-progressbar`
+    }
   }
 
   function el (tag = 'span') {
     return document.createElement(tag)
+  }
+
+  function find (q) {
+    return wrapper.querySelector(q)
+  }
+
+  function replaceClass (elem, from, to) {
+    elem.classList.remove(from)
+    elem.classList.add(to)
   }
 }

@@ -71,83 +71,152 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = function () {
 	  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-	  var opts = _extends({
-	    container: document.body,
-	    duration: 750,
-	    prefixClass: 'prelodr'
-	  }, options);
+	  var defaults = setDefaults(options);
+
+	  var emitter = (0, _emitus2.default)({
+	    show: show,
+	    hide: hide,
+	    setText: setText,
+	    getElement: getElement,
+	    setPrefixClass: setPrefixClass,
+	    setDuration: setDuration,
+	    setZIndex: setZIndex
+	  });
 
 	  var seqr = (0, _seqr2.default)();
-	  var emitr = (0, _emitus2.default)({ show: show, hide: hide, text: text });
+	  var cls = getClasses();
 
-	  var element = el();
 	  var wrapper = el();
-	  var progressbar = el();
-	  var spanText = el();
-	  var textNode = el();
-	  var clsIn = opts.prefixClass + '-in';
-	  var clsHide = opts.prefixClass + '-hide';
+	  wrapper.className = cls.prefix + ' ' + cls.hide;
+	  wrapper.innerHTML = '\n    <span>\n      <span>\n        <span class="' + cls.text + '">' + defaults.text + '</span>\n        <span class="' + cls.progressbar + '"></span>\n      </span>\n    </span>\n  ';
 
-	  spanText.appendChild(textNode);
-	  wrapper.appendChild(spanText);
-	  spanText.appendChild(progressbar);
-	  element.appendChild(wrapper);
-	  element.className = opts.prefixClass;
-	  progressbar.className = opts.prefixClass + '-progressbar';
-	  element.classList.add(clsHide);
-	  opts.container.appendChild(element);
+	  var spanText = find('.' + cls.text);
+	  var spanProgressbar = find('.' + cls.progressbar);
 
-	  return emitr;
+	  defaults.container.appendChild(wrapper);
+
+	  if (defaults.auto) {
+	    show(defaults.text);
+	  }
+
+	  setZIndex(defaults.zIndex);
+
+	  return emitter;
 
 	  function show(str) {
 	    /* istanbul ignore next */
 	    seqr.then(function (done) {
-	      text(str);
+	      setText(str);
 
-	      element.classList.remove(clsHide);
+	      wrapper.classList.remove(cls.hide);
 
 	      setTimeout(function () {
-	        spanText.classList.add(clsIn);
-	        element.classList.add(clsIn);
+	        spanText.classList.add(cls.in);
+	        wrapper.classList.add(cls.in);
 	      }, 10);
 
 	      setTimeout(function () {
-	        emitr.emit('shown');
+	        emitter.emit('shown');
 	        done();
-	      }, opts.duration);
+	      }, defaults.duration);
 	    });
 
-	    return emitr;
+	    return emitter;
 	  }
 
 	  function hide(fn) {
 	    /* istanbul ignore next */
 	    seqr.then(function (done) {
-	      spanText.classList.remove(clsIn);
-	      element.classList.remove(clsIn);
+	      spanText.classList.remove(cls.in);
+	      wrapper.classList.remove(cls.in);
 
 	      setTimeout(function () {
-	        element.classList.add(clsHide);
+	        wrapper.classList.add(cls.hide);
 
 	        if (fn) fn(done);else done();
 
-	        emitr.emit('hidden');
-	      }, opts.duration);
+	        emitter.emit('hidden');
+	      }, defaults.duration);
 	    });
 
-	    return emitr;
+	    return emitter;
 	  }
 
-	  function text() {
-	    var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Loading...';
+	  function setText(str) {
+	    /* istanbul ignore next */
+	    if (!str && defaults.text) {
+	      str = defaults.text;
+	    }
 
-	    textNode.innerHTML = str;
+	    defaults.text = str;
+	    spanText.innerHTML = str;
+
+	    return emitter;
+	  }
+
+	  function getElement() {
+	    return wrapper;
+	  }
+
+	  function setDuration(duration) {
+	    defaults.duration = duration;
+	  }
+
+	  function setZIndex(zindex) {
+	    defaults.zIndex = zindex;
+	    wrapper.style.zIndex = zindex;
+	  }
+
+	  function setPrefixClass(prefix) {
+	    defaults.prefixClass = prefix;
+	    updateClasses();
+	  }
+
+	  function setDefaults() {
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	    return _extends({
+	      container: document.body,
+	      duration: 750,
+	      zIndex: 100,
+	      auto: false,
+	      text: 'Loading...',
+	      prefixClass: 'prelodr'
+	    }, options);
+	  }
+
+	  function updateClasses() {
+	    var from = cls;
+
+	    cls = getClasses();
+	    replaceClass(wrapper, from.prefix, cls.prefix);
+	    replaceClass(spanText, from.text, cls.text);
+	    replaceClass(spanProgressbar, from.progressbar, cls.progressbar);
+	  }
+
+	  function getClasses() {
+	    return {
+	      prefix: defaults.prefixClass,
+	      in: defaults.prefixClass + '-in',
+	      hide: defaults.prefixClass + '-hide',
+	      text: defaults.prefixClass + '-text',
+	      progressbar: defaults.prefixClass + '-progressbar'
+	    };
 	  }
 
 	  function el() {
 	    var tag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'span';
 
 	    return document.createElement(tag);
+	  }
+
+	  function find(q) {
+	    return wrapper.querySelector(q);
+	  }
+
+	  function replaceClass(elem, from, to) {
+	    elem.classList.remove(from);
+	    elem.classList.add(to);
 	  }
 	};
 

@@ -47,9 +47,9 @@
     "node": ">= 4.0"
   },
   "scripts": {
-    "start": "webpack-dev-server -d --content-base ./ --inline prelodr.js",
+    "start": "webpack-dev-server -d --content-base ./ --hot --inline src/app.js",
     "build:css": "node-sass scss/prelodr.scss dist/prelodr.css && cleancss dist/prelodr.css -do dist/prelodr.min.css",
-    "build:lib": "babel ./src -d . --ignore 'test.js'",
+    "build:lib": "babel ./src -d . --ignore 'test.js'. --ignore 'app.js'",
     "build:umd": "webpack src/prelodr.js dist/prelodr.js",
     "build:min": "webpack -p src/prelodr.js dist/prelodr.min.js",
     "build": "node ./scripts/build.js",
@@ -72,11 +72,7 @@
   "jest": {
     "verbose": true,
     "testPathIgnorePatterns": [
-      "/(node_modules|scripts|dist)/"
-    ],
-    "testPathDirs": [
-      "src"
-    ],
-    "testRegex": "test.(js|jsx|spec)$"
+      "/(node_modules|src|scripts|dist)/"
+    ]
   }
 }

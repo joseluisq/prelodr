@@ -35,7 +35,7 @@
     "eslint": "^3.11.1",
     "gzip-size": "^3.0.0",
     "in-publish": "^2.0.0",
-    "jest-cli": "^18.1.0",
+    "jest-cli": "^19.0.1",
     "jsdom": "^9.8.3",
     "node-sass": "^4.4.0",
     "pretty-bytes": "^4.0.2",

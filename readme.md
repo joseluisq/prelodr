@@ -38,11 +38,17 @@ The UMD and style files are also available on [unpkg](https://unpkg.com):
 <script src="https://unpkg.com/prelodr/dist/prelodr.min.js"></script>
 ```
 
-Also available on [JSDelivr](https://www.jsdelivr.com/)
+Available on [JSDelivr](https://www.jsdelivr.com/)
 
 ```html
 <link href="https://cdn.jsdelivr.net/prelodr/latest/prelodr.min.css">
 <script src="https://cdn.jsdelivr.net/prelodr/latest/prelodr.min.js"></script>
+```
+Available on [cdnjs](https://cdnjs.com/libraries/prelodr)
+
+```html
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.0/prelodr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.0/prelodr.min.js"></script>
 ```
 
 You can use the library via `window.Prelodr`.

@@ -1,5 +1,5 @@
 # Prelodr [![Build Status](https://travis-ci.org/joseluisq/prelodr.svg?branch=master)](https://travis-ci.org/joseluisq/prelodr) [![Coverage Status](https://coveralls.io/repos/github/joseluisq/prelodr/badge.svg?branch=master)](https://coveralls.io/github/joseluisq/prelodr?branch=master) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![CDNJS version](https://img.shields.io/cdnjs/v/prelodr.svg)](https://cdnjs.com/libraries/prelodr)
-> A simple Material preloader inspired in Google Inbox.
+> A simple Material preloader inspired by Google Inbox.
 
 [![Prelodr preview](https://cloud.githubusercontent.com/assets/1700322/11434023/c12a2918-9493-11e5-943b-eef39f3420e5.gif)](http://cdpn.io/rVeyXY)
 

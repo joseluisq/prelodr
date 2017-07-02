@@ -21,7 +21,7 @@ yarn add prelodr --dev
 npm install prelodr --save-dev
 ```
 
-##### CDN
+### CDN
 The UMD and style files are also available on [unpkg](https://unpkg.com):
 
 ```html

@@ -3,31 +3,22 @@
 
 [![Prelodr preview](https://cloud.githubusercontent.com/assets/1700322/11434023/c12a2918-9493-11e5-943b-eef39f3420e5.gif)](http://cdpn.io/rVeyXY)
 
-[View demo](http://codepen.io/joseluisq/full/rVeyXY)
+:tada: View demo on [Codepen](http://codepen.io/joseluisq/full/rVeyXY)
 
 For React style check out [react-prelodr](https://github.com/joseluisq/react-prelodr).
 
 ## Install
 
-#### CommonJS
+[Yarn](https://github.com/yarnpkg/)
+
+```sh
+yarn add prelodr --dev
+```
+
+[NPM](https://www.npmjs.com/)
 
 ```sh
 npm install prelodr --save-dev
-```
-
-#### AMD
-
-```js
-requirejs(['prelodr'], Prelodr => {
-
-})
-```
-
-#### Browser
-
-##### Bower
-```sh
-bower install prelodr --save
 ```
 
 ##### CDN
@@ -47,11 +38,11 @@ Available on [JSDelivr](https://www.jsdelivr.com/)
 Available on [cdnjs](https://cdnjs.com/libraries/prelodr)
 
 ```html
-<link href="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.0/prelodr.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.0/prelodr.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.1/prelodr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.1/prelodr.min.js"></script>
 ```
 
-You can use the library via `window.Prelodr`.
+You can use the library via `window.prelodr`.
 
 ## Usage
 
@@ -144,4 +135,4 @@ If you would like to contribute [pull requests](https://github.com/joseluisq/pre
 ## License
 MIT license
 
-© 2017 [José Luis Quintana](http://quintana.io)
+© 2017 [José Luis Quintana](http://git.io/joseluisq)

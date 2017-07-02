@@ -16,63 +16,94 @@
     "name": "José Luis Quintana",
     "url": "http://git.io/joseluisq"
   },
-  "main": "./prelodr.js",
+  "main": "dist/prelodr.js",
   "dependencies": {
-    "emitus": "^1.1.3",
-    "seqr": "^1.0.5"
+    "emitus": "^2.0.3",
+    "seqr": "^1.0.7"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-eslint": "^7.1.1",
-    "babel-jest": "^20.0.0",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-dev-expression": "^0.2.1",
-    "babel-plugin-transform-object-assign": "^6.8.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-1": "^6.16.0",
-    "clean-css": "^4.0.1",
-    "coveralls": "^2.11.15",
-    "eslint": "^3.11.1",
-    "gzip-size": "^3.0.0",
-    "in-publish": "^2.0.0",
-    "jest-cli": "^19.0.1",
-    "jsdom": "^9.8.3",
-    "node-sass": "^4.4.0",
-    "pretty-bytes": "^4.0.2",
-    "readline-sync": "^1.4.5",
-    "webpack": "^2.3.0",
-    "webpack-dev-server": "^2.2.1"
+    "ava": "^0.20.0",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "clean-css-cli": "^4.1.6",
+    "coveralls": "^2.13.1",
+    "cross-env": "^5.0.1",
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jsdom": "^11.0.0",
+    "node-sass": "^4.5.3",
+    "nyc": "^11.0.3",
+    "object-assign": "^4.1.1",
+    "rollup": "^0.43.0",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-inject": "^2.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
   },
   "engines": {
     "node": ">= 4.0"
   },
   "scripts": {
-    "start": "webpack-dev-server -d --content-base ./ --hot --inline src/app.js",
-    "build:css": "node-sass scss/prelodr.scss dist/prelodr.css && cleancss dist/prelodr.css -do dist/prelodr.min.css",
-    "build:lib": "babel ./src -d . --ignore 'test.js'. --ignore 'app.js'",
-    "build:umd": "webpack src/prelodr.js dist/prelodr.js",
-    "build:min": "webpack -p src/prelodr.js dist/prelodr.min.js",
-    "build": "node ./scripts/build.js",
-    "prepublish": "node ./scripts/build.js",
-    "release": "node ./scripts/release.js",
-    "lint": "eslint src",
-    "test": "npm run lint && jest --coverage",
+    "version": "npm run build",
+    "build": "npm run clean && npm run js && npm run css",
+    "js": "npm run js:min && npm run js:unmin",
+    "js:min": "cross-env NODE_ENV=minified rollup -c",
+    "js:unmin": "cross-env NODE_ENV=unminified rollup -c",
+    "css": "node-sass index.scss dist/prelodr.css && cleancss dist/prelodr.css -do dist/prelodr.min.css",
+    "lint": "eslint index.js",
+    "clean": "rm -rf .nyc_output && rm -rf coverage && rm -rf dist",
+    "test": "npm run clean && npm run lint && npm run test:ava",
+    "test:ava": "cross-env NODE_ENV=testing nyc ava --verbose",
+    "test:watch": "ava --verbose --watch",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "babel": {
     "presets": [
       "es2015",
-      "stage-1"
+      "stage-0"
     ],
-    "plugins": [
-      "dev-expression",
-      "transform-object-assign"
+    "env": {
+      "testing": {
+        "presets": [
+          "es2015",
+          "stage-0"
+        ],
+        "ignore": "test.js",
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "standard"
     ]
   },
-  "jest": {
-    "verbose": true,
-    "testPathIgnorePatterns": [
-      "/(node_modules|src|scripts|dist)/"
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "ava": {
+    "require": [
+      "babel-core/register"
+    ]
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "checkCoverage": true,
+    "reporter": [
+      "text",
+      "lcov"
     ]
   }
 }

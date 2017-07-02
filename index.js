@@ -1,12 +1,20 @@
-/* global module */
-
 import Seqr from 'seqr'
-import Extend from 'emitus'
+import Emitus from 'emitus'
 
-module.exports = (options = {}) => {
-  let defaults = setDefaults(options)
+export default function prelodr (options = {}) {
+  let defaults = Object.assign(
+    {
+      container: document.body,
+      duration: 750,
+      zIndex: 100,
+      auto: false,
+      text: 'Loading...',
+      prefixClass: 'prelodr'
+    },
+    options
+  )
 
-  const emitter = Extend({
+  const emitter = Emitus({
     show,
     hide,
     setText,
@@ -21,30 +29,20 @@ module.exports = (options = {}) => {
 
   const wrapper = el()
   wrapper.className = `${cls.prefix} ${cls.hide}`
-  wrapper.innerHTML = `
-    <span>
-      <span>
-        <span class="${cls.text}">${defaults.text}</span>
-        <span class="${cls.progressbar}"></span>
-      </span>
-    </span>
-  `
+  wrapper.innerHTML = `<span><span><span class="${cls.text}">${defaults.text}</span><span class="${cls.progressbar}"></span></span></span>`
 
   const spanText = find(`.${cls.text}`)
   const spanProgressbar = find(`.${cls.progressbar}`)
 
   defaults.container.appendChild(wrapper)
 
-  if (defaults.auto) {
-    show(defaults.text)
-  }
+  if (defaults.auto) show(defaults.text)
 
   setZIndex(defaults.zIndex)
 
   return emitter
 
   function show (str) {
-    /* istanbul ignore next */
     seqr.then(done => {
       setText(str)
 
@@ -65,7 +63,6 @@ module.exports = (options = {}) => {
   }
 
   function hide (fn) {
-    /* istanbul ignore next */
     seqr.then(done => {
       spanText.classList.remove(cls.in)
       wrapper.classList.remove(cls.in)
@@ -84,10 +81,7 @@ module.exports = (options = {}) => {
   }
 
   function setText (str) {
-    /* istanbul ignore next */
-    if (!str && defaults.text) {
-      str = defaults.text
-    }
+    if (!str && defaults.text) str = defaults.text
 
     defaults.text = str
     spanText.innerHTML = str
@@ -111,17 +105,6 @@ module.exports = (options = {}) => {
   function setPrefixClass (prefix) {
     defaults.prefixClass = prefix
     updateClasses()
-  }
-
-  function setDefaults (options = {}) {
-    return Object.assign({
-      container: document.body,
-      duration: 750,
-      zIndex: 100,
-      auto: false,
-      text: 'Loading...',
-      prefixClass: 'prelodr'
-    }, options)
   }
 
   function updateClasses () {

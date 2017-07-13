@@ -22,7 +22,7 @@
     "seqr": "^1.0.7"
   },
   "devDependencies": {
-    "ava": "^0.20.0",
+    "ava": "^0.21.0",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-runtime": "^6.23.0",
